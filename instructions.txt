@@ -102,4 +102,9 @@ Day 1:
 - Created react app, setting it up
 - Start with implementing user stories
 - Started user story 1
+- Stopped user story 1 because fetching data failed
+- Fixed db - controller for events was missing
+- Tested GET /events endpoint, works fine, delivers data from db
+- SUCCESS: reducer works, events are in the redux store
+
 
