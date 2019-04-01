@@ -8,10 +8,10 @@ The app should have a login and signup page for customers. You need to login to 
 
 Events have:
 
-* a name
-* a description
-* a picture or logo
-* a start and end date (could be the same)
+* a name ++
+* a description ++
+* a picture or logo ++
+* a start and end date (could be the same) ++
 
 After you click on an event, you see a list of tickets that are offered for this event.
 

@@ -1,4 +1,3 @@
-// src/pages/entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, Length, MinLength } from 'class-validator'
@@ -26,6 +25,9 @@ export default class Event extends BaseEntity {
 
   @CreateDateColumn({type:'date'})
   start: Date;
+
+  @CreateDateColumn({type:'date'})
+  end: Date;
 
 }
 
