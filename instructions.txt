@@ -106,5 +106,7 @@ Day 1:
 - Fixed db - controller for events was missing
 - Tested GET /events endpoint, works fine, delivers data from db
 - SUCCESS: reducer works, events are in the redux store
+- Struggled with mapping over events in EventsList, fixed by mapping one step further, data was nested
+- List with events is now displayed
 
 

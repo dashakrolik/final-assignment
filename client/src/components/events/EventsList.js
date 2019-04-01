@@ -4,12 +4,16 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function EventsList(props) {
-  console.log('I am EventsList')
+    let name = props
+    console.log(name)
+    console.log(props)
+
+  console.log('I am EventsList props', props.events)
     if (props.events) {
-      return (<div  className="eventsList">
-        <ul>{props.events.map((item, index) => {
-            const { name, description, id } = item
-            return <li key={id}><Link to={`/events/${id}`} >{name}</Link></li>
+      return (<div  className="eventsList"><br></br><br></br>
+        <ul>{props.events.events.map((item) => {
+            const { name, id } = item
+            return <li key={id}>{name}</li>
           })}
           </ul>
         </div>
