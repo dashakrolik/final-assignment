@@ -15,15 +15,15 @@ Events have:
 
 After you click on an event, you see a list of tickets that are offered for this event.
 
-A ticket is made for a specific event and has an author (the user that created the ticket). Apart from that, it has:
+A ticket is made for a specific event and has an author (the user that created the ticket). ++ Relations ++ Apart from that, it has:
 
-* a picture of the ticket (optional field)
-* a price
-* a description
+* a picture of the ticket (optional field) ++
+* a price ++ Integer
+* a description ++
 
 When you click on a ticket, you see the details of that ticket (description/price) and which event it's for. On this page you can add comments as a customer, and everybody can see all the comments.
 
-A comment has a text and is connected to a specific ticket. It also has an author. 
+A comment has a text and is connected to a specific ticket. It also has an author. ++
 
 Anybody can view events and tickets, but you have to login to add a new ticket or comment. 
 
@@ -93,4 +93,13 @@ We don't want you to publish the code of your final assignment on GitHub during 
 Collapse
 
 
+
+### Notes to Self
+Day 1:
+- Set up db and all Relations
+- Test db with Postman
+- Auth in db is not completely done & checked
+- Created react app, setting it up
+- Start with implementing user stories
+- Started user story 1
 

@@ -3,22 +3,13 @@ import { Exclude } from 'class-transformer';
 import { MinLength, IsString, IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt'
 import Ticket from '../tickets/entity';
+import Comment from '../comments/entity';
 
 @Entity()
 export default class User extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id?: number
-
-  @IsString()
-  @MinLength(2)
-  @Column('text')
-  firstName: string
-
-  @IsString()
-  @MinLength(2)
-  @Column('text')
-  lastName: string
 
   @IsEmail()
   @Column('text')
@@ -32,6 +23,9 @@ export default class User extends BaseEntity {
 
   @OneToMany(_ => Ticket, ticket => ticket.user)
   tickets: Ticket[];
+
+  @OneToMany(_ => Comment, comment => comment.user)
+  comments: Comment[];
 
   async setPassword(rawPassword: string) {
     const hash = await bcrypt.hash(rawPassword, 10)
