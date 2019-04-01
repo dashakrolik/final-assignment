@@ -2,9 +2,6 @@ import * as React from 'react'
 import EventForm from './EventForm'
 
 export default function EventDetails(props) {
-  console.log('EventDetails props.onEdit test:', props.onEdit)
-  console.log('EventDetails props.ourState test:', props.ourState)
-  console.log('EventDetails props test:', props)
 
   if(props.event) {
   return (

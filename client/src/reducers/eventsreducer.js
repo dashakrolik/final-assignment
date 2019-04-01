@@ -8,8 +8,6 @@ const eventsReducer = (state = null, action = {}) => {
     return state.filter(event =>
       event.id !== action.id
       )
-  case 'TICKETS_FETCHED':
-      return action.tickets
     default:
       return state
   }

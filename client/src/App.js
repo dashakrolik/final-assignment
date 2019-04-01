@@ -9,6 +9,7 @@ import EventsList from './components/events/EventsList'
 import EventDetailsContainer from './components/events/EventDetailsContainer'
 import EventsListContainer from './components/events/EventsListContainer';
 import CreateEventFormContainer from './components/events/CreateEventFormContainer'
+import TicketDetailsContainer from './components/tickets/TicketDetailsContainer'
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
             <Route exact path="/events" component={EventsListContainer} />
             <Route exact path="/form" exact component={CreateEventFormContainer} />
             <Route exact path="/events/:id" component={EventDetailsContainer} />
+            <Route exact path="/tickets/:id" component={TicketDetailsContainer} />
             <Route exact path="/" render={ () => <Redirect to="/events" /> } />
           </main>
         </div>

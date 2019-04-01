@@ -1,1 +1,0 @@
-// Passes props to TicketsList

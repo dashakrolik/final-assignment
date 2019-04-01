@@ -4,6 +4,8 @@ import currentUser from './currentUser'
 import signup from './signup'
 import fetchedEvents from './eventsreducer'
 import fetchedEvent from './eventFetchedReducer'
+import fetchedTickets from './TicketsReducer'
+import ticketFetched from './TicketFetched'
 
 
 export default {
@@ -12,5 +14,7 @@ export default {
   currentUser,
   signup,
   fetchedEvents,
-  fetchedEvent
+  fetchedEvent,
+  fetchedTickets,
+  ticketFetched
 }

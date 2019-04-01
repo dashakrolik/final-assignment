@@ -108,3 +108,16 @@ export const loadTickets = () => (dispatch, getState) => {
     })
     .catch(console.error)
 }
+
+export const TICKET_FETCHED = 'TICKET_FETCHED'
+const ticketFetched = ticket => ({
+  type: TICKET_FETCHED,
+  ticket
+})
+export const loadTicket = (id) => (dispatch, getState) => {
+  request(`${baseUrl}/tickets/${id}`)
+    .then(response =>  {
+      dispatch(ticketFetched(response.body))
+    })
+    .catch(console.err)
+}
