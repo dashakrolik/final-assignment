@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, Length, MinLength } from 'class-validator'
+import Ticket from '../tickets/entity'
 
 @Entity()
 export default class Event extends BaseEntity {
@@ -29,6 +30,8 @@ export default class Event extends BaseEntity {
   @CreateDateColumn({type:'date'})
   end: Date;
 
+  @OneToMany(_ => Ticket, ticket => ticket.user)
+  tickets: Ticket[];
 }
 
 

@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, Length, MinLength } from 'class-validator'
 import User from '../users/entity'
+import Event from '../events/entity'
 
 @Entity()
 export default class Ticket extends BaseEntity {
@@ -26,4 +27,7 @@ export default class Ticket extends BaseEntity {
   
   @ManyToOne(_ => User, user => user.tickets)
   user: User
+
+  @ManyToOne(_ => Event, event => event.tickets)
+  event: Event
 }
