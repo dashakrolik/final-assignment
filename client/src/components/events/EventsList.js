@@ -13,7 +13,9 @@ export default function EventsList(props) {
       return (<div  className="eventsList"><br></br><br></br>
         <ul>{props.events.events.map((item) => {
             const { name, id } = item
-            return <li key={id}>{name}</li>
+            return <li key={id}>
+            ><Link to={`/events/${id}`} >{name} | Id: {id}</Link>
+            </li>
           })}
           </ul>
         </div>
