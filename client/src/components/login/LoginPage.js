@@ -34,17 +34,7 @@ class LoginPage extends PureComponent {
 				<div style={divStyle}>
 					<h4 style={{padding:"5px"}}>BATTLE PLAGUE!</h4>
 					<p style={{margin:"10px"}}>
-						There's an outbreak of plague!!! 
-						Be the first to get rid of the nasty bugs 
-						and win victory!!!
-					</p>
-					
-					<h4 style={{margin:"10px"}}>How to play:</h4>
-					<p style={{margin:"10px"}}>
-						Click on your gameboard and find where
-						5 bacterial bugs are hidden. The first to 
-						find them all wins!!! Check out your opponent's
-						board to see their progress.
+						Login
 					</p>
 				</div>
 
@@ -58,7 +48,8 @@ class LoginPage extends PureComponent {
 const mapStateToProps = function (state) {
 	return {
 		currentUser: state.currentUser,
-    error: state.login.error
+		error: state.login.error,
+		users: state.users
 	}
 }
 

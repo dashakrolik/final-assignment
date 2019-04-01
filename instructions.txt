@@ -108,5 +108,9 @@ Day 1:
 - SUCCESS: reducer works, events are in the redux store
 - Struggled with mapping over events in EventsList, fixed by mapping one step further, data was nested
 - List with events is now displayed
+- Items on the list are now clickable and redirect to a page with the details about this specific event
+
+
+
 
 

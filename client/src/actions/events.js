@@ -89,3 +89,22 @@ export const updateEvent = (id, data) => dispatch => {
     })
     .catch(console.err)
 }
+
+export const TICKETS_FETCHED = 'TICKETS_FETCHED'
+const ticketsFetched = tickets => ({
+  type: TICKETS_FETCHED,
+  tickets
+})
+
+export const loadTickets = () => (dispatch, getState) => {
+  // when the state already contains events, we don't fetch them again
+  if (getState().tickets) return
+
+  // a GET /events request
+  request(`${baseUrl}/tickets`)
+    .then(response => {
+      // dispatch an EVENTS_FETCHED action that contains the events
+      dispatch(ticketsFetched(response.body))
+    })
+    .catch(console.error)
+}

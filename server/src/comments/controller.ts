@@ -8,7 +8,7 @@ import {
     Post,
     HttpCode, Authorized
   } from "routing-controllers";
-  import Event from "./entity";
+  import Comment from "./entity";
   
   @JsonController()
   export default class CommentsController {
