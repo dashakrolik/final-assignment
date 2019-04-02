@@ -25,10 +25,33 @@ class TicketDetails extends PureComponent{
     }
   
   //Start of code for risk
-// * if the ticket is the only ticket of the author, add 10%
+// * if the ticket is the only ticket of the author, add 10% ++
+authorRisk = () => {
+  const authorId = this.props.tickets.map(ticket => {
+    return ticket.user.id
+  })
+  const authorTickets = authorId.filter(author => {
+    return author = this.props.ticket.user.id
+  }).length
+  console.log(authorTickets)
+  if (authorTickets === 1) {
+    return 10 
+  } else {
+    return 0
+  }
+}
 
-
-
+// * if the ticket price is lower than the average ticket price for that event, that's a risk
+priceRisk = () => {
+  const allTickets = this.props.tickets.length
+  const oneTicketPrice = this.props.ticket.price
+  const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
+  const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
+  const average = total / allTickets
+  // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
+// 	* if a ticket is X% more expensive than the average price, 
+//deduct X% from the risk, with a maximum of 10% deduction
+}
 
 
 
@@ -46,17 +69,6 @@ class TicketDetails extends PureComponent{
 
 
   render() {
-   const authorRisk = () => {
-      const authorId = this.props.tickets.map(ticket => {
-        return ticket.user.id
-      })
-      const authorTickets = authorId.filter(author => {
-        return author = this.props.ticket.user.id
-      }).length
-      console.log(authorTickets)
-    }
-
-    authorRisk()
     console.log('i mounted')
     console.log('props', this.props.tickets)
       const {ticket} = this.props 
