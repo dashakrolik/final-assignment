@@ -30,7 +30,7 @@ export const loadTicket = (ticketId) => (dispatch) => {
     .catch(err => alert(err))
 }
 
-export const loadSelectedTcikets = (eventId) => (dispatch) => {
+export const loadSelectedTickets = (eventId) => (dispatch) => {
     request
     .get(`${ baseUrl }/events/tickets/${ eventId }`)
     .then( response => dispatch({

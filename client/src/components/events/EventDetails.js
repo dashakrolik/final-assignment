@@ -2,13 +2,15 @@ import React, {PureComponent} from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { loadEvent } from '../../actions/events';
-import { loadSelectedTcikets, createTicket } from '../../actions/tickets'
+import { getUsers } from '../../actions/users';
+import { loadSelectedTickets, createTicket } from '../../actions/tickets'
 import TicketForm from '../tickets/TicketForm'
 
 class EventDetails extends PureComponent{    
   componentDidMount() {
     this.props.loadEvent(this.props.match.params.id) 
-    this.props.loadSelectedTcikets(this.props.match.params.id)
+    this.props.loadSelectedTickets(this.props.match.params.id)
+    this.props.getUsers()
   }
 
   createTicket = (ticket) => {
@@ -58,8 +60,9 @@ const mapStateToProps = function (state) {
   return {
     event: state.event,
     tickets: state.tickets,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    users: state.users
   }
 }
 
-export default connect(mapStateToProps, { loadEvent , loadSelectedTcikets, createTicket })(EventDetails)
+export default connect(mapStateToProps, { loadEvent , loadSelectedTickets, createTicket, getUsers })(EventDetails)

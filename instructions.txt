@@ -4,7 +4,7 @@ You're going to build a full stack web-application where users can buy and sell 
 
 ## Description
 
-The app should have a login and signup page for customers. You need to login to create events, tickets and posting comments. 
+The app should have a login and signup page for customers. You need to login to create events, tickets and posting comments. ++
 
 Events have:
 
@@ -13,7 +13,7 @@ Events have:
 * a picture or logo ++
 * a start and end date (could be the same) ++
 
-After you click on an event, you see a list of tickets that are offered for this event.
+After you click on an event, you see a list of tickets that are offered for this event. ++
 
 A ticket is made for a specific event and has an author (the user that created the ticket). ++ Relations ++ Apart from that, it has:
 
@@ -21,7 +21,7 @@ A ticket is made for a specific event and has an author (the user that created t
 * a price ++ Integer
 * a description ++
 
-When you click on a ticket, you see the details of that ticket (description/price) and which event it's for. On this page you can add comments as a customer, and everybody can see all the comments.
+When you click on a ticket, you see the details of that ticket (description/price) ++ and which event it's for ++ . On this page you can add comments as a customer, and everybody can see all the comments.
 
 A comment has a text and is connected to a specific ticket. It also has an author. ++
 
@@ -54,15 +54,15 @@ The calculated risk of a ticket depends on many factors. Make sure that the risk
 
 ## User stories
 
-* As a customer I want to see max. 9 events on a page and be able to click 'next' to see more pages of events if there are more
-* As a customer I only want to see events that are not finished yet
+* As a customer I want to see max. 9 events on a page and be able to click 'next' to see more pages of events if there are more ?? pagination??
+* As a customer I only want to see events that are not finished yet ##TODO
 * As a customer I want to view a list of tickets when I click on an event ++ DONE
-* As a customer I want to view ticket details when I click on a ticket in the ticket list
-* As a customer I want to see what the fraud-risk is for a specific ticket
+* As a customer I want to view ticket details when I click on a ticket in the ticket list ++
+* As a customer I want to see what the fraud-risk is for a specific ticket ##TODO
 * As a customer I want to be able to login, or sign up if I don't have an account yet ++
-* As a logged in customer I want to add a ticket (for a specific event) that shows up on the event page with a title, picture, price and description
+* As a logged in customer I want to add a ticket (for a specific event) that shows up on the event page with a title, picture, price and description NOT WORKING
 * As an author of the ticket I want to be able to edit a ticket's description, price and picture (other logged in customers cannot do this! only authors and admins)
-* As a logged in customer I want to be able to create events with a name, picture (logo), date and description
+* As a logged in customer I want to be able to create events with a name, picture (logo), date and description NOT WORKING
 * As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
 
 ## Tools and technology
