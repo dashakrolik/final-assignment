@@ -6,11 +6,16 @@ import TicketForm from './TicketForm'
 
 class TicketDetails extends PureComponent{
  state = { edit: false }
+  componentWillMount() {
+    this.props.loadTicket(this.props.match.params.id)
+    this.props.loadTickets()
+    this.props.getUsers() 
+  }
+
   componentDidMount() {
     this.props.loadTicket(this.props.match.params.id)
     this.props.loadTickets()
-    this.props.getUsers()
-    
+    this.props.getUsers() 
   }
 
   toggleEdit = () => {
@@ -51,6 +56,12 @@ priceRisk = () => {
   // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
 // 	* if a ticket is X% more expensive than the average price, 
 //deduct X% from the risk, with a maximum of 10% deduction
+  const risk = (-100 * oneTicketPrice / average - 100)
+  if (risk < -10) {
+    return -10
+  } else {
+    return risk
+  }
 }
 
 
@@ -69,9 +80,34 @@ priceRisk = () => {
 
 
   render() {
+    const {ticket} = this.props 
+
+    if (this.props) {
+ 
+   const priceRisk = () => {
+      const allTickets = this.props.tickets.length
+      console.log(this.props)
+      const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
+      const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
+      const average = total / allTickets
+      // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
+    // 	* if a ticket is X% more expensive than the average price, 
+    //deduct X% from the risk, with a maximum of 10% deduction
+      const risk = (-100 * 400 / average - 100)
+      if (risk < -10) {
+        return -10
+      } else {
+        return (console.log('risk'))
+      }
+    }
+
+    priceRisk()
+  } return null;
+
+    
     console.log('i mounted')
     console.log('props', this.props.tickets)
-      const {ticket} = this.props 
+
       if (ticket) {
       return(
       <div>
