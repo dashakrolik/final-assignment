@@ -1,123 +1,47 @@
-import request from 'superagent'
+import * as request from 'superagent'
+import {baseUrl} from '../constants'
+import {logout} from './users'
+import {isExpired} from '../jwt'
 
 export const EVENTS_FETCHED = 'EVENTS_FETCHED'
-const baseUrl = 'http://localhost:4000'
+export const EVENT_CREATE_SUCCESS = 'EVENT_CREATE_SUCCESS'
+export const EVENT_FETCHED = 'EVENT_FETCHED'
 
-const eventsFetched = events => ({
-  type: EVENTS_FETCHED,
-  events
-})
-
-export const loadEvents = () => (dispatch, getState) => {
-  // when the state already contains events, we don't fetch them again
-  if (getState().events) return
-
-  // a GET /events request
-  request(`${baseUrl}/events`)
-    .then(response => {
-      // dispatch an EVENTS_FETCHED action that contains the events
-      dispatch(eventsFetched(response.body))
-    })
-    .catch(console.error)
+export const loadEvents = () => (dispatch) => {
+  request
+  .get(`${ baseUrl }/events`)
+  .then( response => dispatch({
+      type: EVENTS_FETCHED,
+      payload: response.body.events
+  }))
+  .catch(err => alert(err))
 }
 
+export const createEvent = (event) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
 
-
-export const EVENT_CREATE_SUCCESS = 'EVENT_CREATE_SUCCESS'
-const eventCreateSuccess = event => ({
-  type: EVENT_CREATE_SUCCESS,
-  event
-})
-
-export const createEvent = (data) => dispatch => {
+  if (isExpired(jwt)) return dispatch(logout())
   request
     .post(`${baseUrl}/events`)
-    .send(data)
-    .then(response => {
-      dispatch(eventCreateSuccess(response.body))
-    })
-    .catch(console.error)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(event)
+    .then(response => dispatch({
+        type: EVENT_CREATE_SUCCESS,
+        payload: response.body
+    }))
+    .catch(err => console.error(err))
 }
 
-
-
-export const EVENT_FETCHED = 'EVENT_FETCHED'
-const eventFetched = event => ({
-  type: EVENT_FETCHED,
-  event
-})
-export const loadEvent = (id) => (dispatch, getState) => {
-  request(`${baseUrl}/events/${id}`)
-    .then(response =>  {
-      dispatch(eventFetched(response.body))
-    })
-    .catch(console.err)
-}
-
-
-
-export const EVENT_DELETE_SUCCESS = 'EVENT_DELETE_SUCCESS'
-const eventDeleted = id => ({
-  type: EVENT_DELETE_SUCCESS,
-  id
-})
-
-export const deleteEvent = (id) => dispatch => {
+export const loadEvent = (eventId) => (dispatch) => {
   request
-    .delete(`${baseUrl}/events/${id}`)
-    .then(response => {
-      dispatch(eventDeleted(id))
-    })
-    .catch(console.err)
+    .get(`${baseUrl}/events/${eventId}`)
+    .then(response => dispatch({
+      type: EVENT_FETCHED,
+      payload: response.body
+    }))
+    .catch(err => alert(err))
 }
 
 
-export const EVENT_UPDATE = 'EVENT_UPDATE'
-const eventUpdated = event => ({
-  type: EVENT_UPDATE,
-  event
-})
 
-export const updateEvent = (id, data) => dispatch => {
-  console.log('updateEvent test!')
-  request
-    .patch(`${baseUrl}/events/${id}`)
-    .send(data)
-    .then(response => {
-      console.log('response.body test:', response.body)
-      dispatch(eventUpdated(response.body))
-    })
-    .catch(console.err)
-}
-
-export const TICKETS_FETCHED = 'TICKETS_FETCHED'
-const ticketsFetched = tickets => ({
-  type: TICKETS_FETCHED,
-  tickets
-})
-
-export const loadTickets = () => (dispatch, getState) => {
-  // when the state already contains events, we don't fetch them again
-  if (getState().tickets) return
-
-  // a GET /events request
-  request(`${baseUrl}/tickets`)
-    .then(response => {
-      // dispatch an EVENTS_FETCHED action that contains the events
-      dispatch(ticketsFetched(response.body))
-    })
-    .catch(console.error)
-}
-
-export const TICKET_FETCHED = 'TICKET_FETCHED'
-const ticketFetched = ticket => ({
-  type: TICKET_FETCHED,
-  ticket
-})
-export const loadTicket = (id) => (dispatch, getState) => {
-  request(`${baseUrl}/tickets/${id}`)
-    .then(response =>  {
-      dispatch(ticketFetched(response.body))
-    })
-    .catch(console.err)
-}

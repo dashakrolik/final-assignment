@@ -1,8 +1,9 @@
-import React, {PureComponent} from 'react'
-import {connect} from 'react-redux'
-import {login} from '../../actions/users'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { login } from '../../actions/users'
 import LoginForm from './LoginForm'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+
 
 class LoginPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -13,43 +14,24 @@ class LoginPage extends PureComponent {
 		if (this.props.currentUser) return (
 			<Redirect to="/" />
 		)
-		const divStyle = {
-			// border: '5px solid green', 
-			// width: '300px',
-			// margin: 'auto',
-			// position: 'center',
-			// margin-top: '20px',
-			margin: 'auto',
-			padding: '20px',
-			width: '50%',
-			background: 'rgb(255, 255, 255, .3)'
-		}
 
 		return (
 			<div>
-				<h1>Login</h1>
+				<h1>Please Login</h1>
 
 				<LoginForm onSubmit={this.handleSubmit} />
 
-				<div style={divStyle}>
-					<h4 style={{padding:"5px"}}>BATTLE PLAGUE!</h4>
-					<p style={{margin:"10px"}}>
-						Login
-					</p>
-				</div>
-
-        { this.props.error && 
-          <span style={{color:'red'}}>{this.props.error}</span> }
-			</div>
-		)
+                { this.props.error && 
+                <span style={{color:'red'}}>{this.props.error}</span> }
+            </div>
+        )
 	}
 }
 
 const mapStateToProps = function (state) {
 	return {
 		currentUser: state.currentUser,
-		error: state.login.error,
-		users: state.users
+        error: state.login.error
 	}
 }
 

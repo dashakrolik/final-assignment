@@ -1,48 +1,31 @@
-import {
-    JsonController,
-    Get,
-    Param,
-    Put,
-    Body,
-    NotFoundError,
-    Post,
-    HttpCode, Authorized
-  } from "routing-controllers";
-  import Comment from "./entity";
-  
-  @JsonController()
-  export default class CommentsController {
-    @Get('/comments/:id')
-    getComment(
-      @Param('id') id: number
-    ) {
-      return Comment.findOne(id)
-    }
-  
+import { JsonController, Get, Param, Authorized, Post, HttpCode, Body, CurrentUser } from 'routing-controllers'
+import Comment from './entity'
+import User from '../users/entity'
+
+@JsonController()
+export default class CommentsController {
+
     @Get('/comments')
     async allComments() {
-      const comments = await Comment.find()
-      return { comments }
-    }
-  
-    @Put('/comments/:id')
-    async updatePage(
-      @Param('id') id: number,
-      @Body() update: Partial<Comment>
+        const comments = await Comment.find()
+        return { comments }
+    }   
+   
+    @Get('/comments/:id([0-9]+)')
+    getComment(
+        @Param('id') id: number
     ) {
-      const comment = await Comment.findOne(id)
-      if (!comment) throw new NotFoundError('Cannot find comment')
-  
-      return Comment.merge(comment, update).save()
-    }
-  
+        return Comment.findOne(id)
+    }  
+
     @Authorized()
-    @Post('/events')
+    @Post('/comments')
     @HttpCode(201)
-    createComment(
-      @Body() comment: Comment //put json data into the body of the page variable
+    async createComment(
+        @CurrentUser() user: User, 
+        @Body() comment: Comment
     ) {
-      return comment.save()
+        if (user) comment.user = user
+        return await comment.save()
     }
-  }
-  
+}

@@ -11,11 +11,11 @@ export default class Comment extends BaseEntity {
   id?: number
 
   @IsString()
-  @Length(5, 25)
+  @Length(3, 25)
   @Column('text')
   content: string
 
-  @ManyToOne(_ => User, user => user.comments)
+  @ManyToOne(_ => User, user => user.comments, {eager: true})
   user: User
 
   @ManyToOne(_ => Ticket, ticket => ticket.comments)

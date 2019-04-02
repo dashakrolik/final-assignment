@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, Length, MinLength } from 'class-validator'
 import Ticket from '../tickets/entity'
+import User from '../users/entity';
 
 @Entity()
 export default class Event extends BaseEntity {
@@ -10,27 +11,30 @@ export default class Event extends BaseEntity {
   id?: number
 
   @IsString()
-  @Length(5, 25)
+  @Length(3, 25)
   @Column('text')
   name: string
 
   @IsString()
-  @MinLength(10)
+  @MinLength(3)
   @Column('text')
   description: string
 
   @IsString()
-  @MinLength(10)
+  @MinLength(5)
   @Column('text')
   url: string
 
-  @CreateDateColumn({type:'date'})
+  @Column('date')
   start: Date;
 
-  @CreateDateColumn({type:'date'})
+  @Column('date')
   end: Date;
 
-  @OneToMany(_ => Ticket, ticket => ticket.user)
+  @ManyToOne(_ => User, user => user.events, {eager:true})
+  user: User
+
+  @OneToMany(_ => Ticket, ticket => ticket.event, {eager:true})
   tickets: Ticket[];
 }
 

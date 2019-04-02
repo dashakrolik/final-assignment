@@ -2,21 +2,21 @@ import {
     JsonController,
     Get,
     Param,
-    Put,
     Body,
-    NotFoundError,
     Post,
-    HttpCode, Authorized
+    HttpCode, Authorized, CurrentUser
   } from "routing-controllers";
   import Event from "./entity";
+import User from "../users/entity";
   
   @JsonController()
   export default class EventsController {
     @Get('/events/:id')
-    getEvent(
+    async getEvent(
       @Param('id') id: number
     ) {
-      return Event.findOne(id)
+      const event = await Event.findOne(id)
+      return event
     }
   
     @Get('/events')
@@ -24,25 +24,19 @@ import {
       const events = await Event.find()
       return { events }
     }
-  
-    @Put('/events/:id')
-    async updatePage(
-      @Param('id') id: number,
-      @Body() update: Partial<Event>
-    ) {
-      const event = await Event.findOne(id)
-      if (!event) throw new NotFoundError('Cannot find event')
-  
-      return Event.merge(event, update).save()
-    }
+
   
     @Authorized()
     @Post('/events')
     @HttpCode(201)
-    createEvent(
-      @Body() event: Event //put json data into the body of the page variable
-    ) {
-      return event.save()
-    }
+    async createEvent(
+        @CurrentUser() user: User,
+        @Body() event: Event
+        ) {
+            if(user instanceof User) event.user = user
+            return event.save()
+        }
+
+
   }
   

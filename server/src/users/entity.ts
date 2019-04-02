@@ -4,12 +4,18 @@ import { MinLength, IsString, IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt'
 import Ticket from '../tickets/entity';
 import Comment from '../comments/entity';
+import Event from '../events/entity';
 
 @Entity()
 export default class User extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id?: number
+
+  @IsString()
+  @MinLength(3)
+  @Column('text')
+  firstName: string
 
   @IsEmail()
   @Column('text')
@@ -20,6 +26,9 @@ export default class User extends BaseEntity {
   @Column('text')
   @Exclude({ toPlainOnly: true })
   password: string
+
+  @OneToMany(_ => Event, event => event.user)
+  events: Event[];
 
   @OneToMany(_ => Ticket, ticket => ticket.user)
   tickets: Ticket[];

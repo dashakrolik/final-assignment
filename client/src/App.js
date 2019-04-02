@@ -6,10 +6,9 @@ import SignupPage from './components/signup/SignupPage'
 import LogoutPage from './components/logout/LogoutPage'
 import TopBar from './components/layout/TopBar'
 import EventsList from './components/events/EventsList'
-import EventDetailsContainer from './components/events/EventDetailsContainer'
-import EventsListContainer from './components/events/EventsListContainer';
-import CreateEventFormContainer from './components/events/CreateEventFormContainer'
-import TicketDetailsContainer from './components/tickets/TicketDetailsContainer'
+import EventDetails from './components/events/EventDetails'
+import TicketDetails from './components/tickets/TicketDetails'
+
 
 class App extends Component {
   render() {
@@ -23,10 +22,9 @@ class App extends Component {
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/signup" component={SignupPage} />
-            <Route exact path="/events" component={EventsListContainer} />
-            <Route exact path="/form" exact component={CreateEventFormContainer} />
-            <Route exact path="/events/:id" component={EventDetailsContainer} />
-            <Route exact path="/tickets/:id" component={TicketDetailsContainer} />
+            <Route exact path="/events" component={EventsList} />
+            <Route exact path="/events/:id" component={EventDetails} />
+            <Route exact path="/tickets/:id" component={TicketDetails} />
             <Route exact path="/" render={ () => <Redirect to="/events" /> } />
           </main>
         </div>
@@ -37,5 +35,3 @@ class App extends Component {
 
 export default App;
 
-
-{/* <Route exact path="/events/:id" component={EventDetails} /> */}
