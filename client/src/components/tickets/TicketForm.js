@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 
 export default class TicketForm extends PureComponent {
-  state = { values: ''}
+  state = { values: '' }
 
   handleChange = (event) => {
     const { name, value } = event.target
@@ -30,6 +30,10 @@ export default class TicketForm extends PureComponent {
 						this.state.price !== null || undefined ? this.state.price : values.price || ''
 					} onChange={ this.handleChange } />
 
+        <label>Date created</label>
+					<input name="dateCreated" value={
+						this.state.dateCreated !== null || undefined ? this.state.dateCreated : values.dateCreated || ''
+					} onChange={ this.handleChange } />
 
 				<label >Description</label>
 					<input name="description" value={
