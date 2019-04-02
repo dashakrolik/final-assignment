@@ -27,11 +27,7 @@ class TicketDetails extends PureComponent{
   //Start of code for risk
 // * if the ticket is the only ticket of the author, add 10%
 
-authorRisk () {
-  this.props.tickets.map(ticket => {
-    return ticket.user.id
-  })
-}
+
 
 
 
@@ -50,6 +46,17 @@ authorRisk () {
 
 
   render() {
+   const authorRisk = () => {
+      const authorId = this.props.tickets.map(ticket => {
+        return ticket.user.id
+      })
+      const authorTickets = authorId.filter(author => {
+        return author = this.props.ticket.user.id
+      }).length
+      console.log(authorTickets)
+    }
+
+    authorRisk()
     console.log('i mounted')
     console.log('props', this.props.tickets)
       const {ticket} = this.props 
