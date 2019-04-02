@@ -28,13 +28,10 @@ class EventDetails extends PureComponent{
             <p>Event: {event.name}</p>
             <p>{event.description}</p>
             <img src={event.url}/>
-            <p>Starts on: {event.dateCreated}</p>
+            <p>Starts on: {event.start}</p>
               <ul>
-                <li>Seller email</li>
-                <li>Price</li>
-                <li>Description</li>
-                <li>Date</li>
-                <li>Link</li>
+                <li>Event name: {event.name}</li>
+                <li>Description: {event.description}</li>
               </ul>
             { tickets.map(ticket => (
               <ul>

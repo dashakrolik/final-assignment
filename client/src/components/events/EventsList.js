@@ -13,9 +13,23 @@ class EventsList extends PureComponent{
     this.props.loadEvents()
     this.props.getUsers()
   }
+
+
+
   
   render() {
     const {events} = this.props 
+    const getCurrentDate = () => {
+      var d = Date();
+      var currentDate = d.toString()
+      return currentDate
+      }
+
+    const printDate = getCurrentDate()
+
+    console.log(printDate)
+
+
     return (
     <div>
       <br></br><br></br><br></br><br></br><br></br>
