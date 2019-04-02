@@ -64,6 +64,26 @@ priceRisk = () => {
   }
 }
 
+priceRisk = () => {
+  const allTickets = this.props.tickets.length
+  console.log(allTickets)
+  const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
+  console.log(manyTicketsPrice)
+  const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
+  console.log(total)
+  const average = total / allTickets
+  console.log(average)
+  // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
+// 	* if a ticket is X% more expensive than the average price, 
+//deduct X% from the risk, with a maximum of 10% deduction
+  const risk = (100 * this.props.ticket.price / average - 100)
+  if (risk < -10) {
+    return risk-10
+  } else {
+    return risk
+  }
+}
+
 
 
 
@@ -82,30 +102,10 @@ priceRisk = () => {
   render() {
     const {ticket} = this.props 
 
-    if (this.props.ticket && this.props.tickets) {
- 
-   const priceRisk = () => {
-      const allTickets = this.props.tickets.length
-      console.log(allTickets)
-      const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
-      console.log(manyTicketsPrice)
-      const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
-      console.log(total)
-      const average = total / allTickets
-      console.log(average)
-      // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
-    // 	* if a ticket is X% more expensive than the average price, 
-    //deduct X% from the risk, with a maximum of 10% deduction
-      const risk = (100 * this.props.ticket.price / average - 100)
-      if (risk < -10) {
-        return console.log(risk-10)
-      } else {
-        return (console.log(risk))
-      }
-    }
 
-    priceRisk()
-  } return null;
+ 
+
+
 
     
     console.log('i mounted')
