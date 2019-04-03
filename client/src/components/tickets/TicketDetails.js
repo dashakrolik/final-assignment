@@ -87,13 +87,34 @@ commentRisk = () => {
 // if the ticket was added during business hours (9-17), 
 //deduct 10% from the risk, if not, add 10% to the risk
 dateRisk = () => {
-  const dateCreated = this.props.tickets.dateCreated
-  //"2019-04-03T07:11:36.789Z"
+  const dateCreated = this.props.ticket.dateCreated
+  const hours = new Date(dateCreated)
+  const newHours = hours.getHours()
+  if (newHours >= 9 && newHours <= 17) {
+    return -10
+  } else {
+    return 10
+  }
 }
 
 
+// The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
+totalRisk = () => {
+  const authorRisk = this.authorRisk()
+  const priceRisk = this.priceRisk()
+  const commentRisk = this.commentRisk()
+  const dateRisk = this.dateRisk()
 
+  const risk = authorRisk + priceRisk + commentRisk + dateRisk
 
+  if (risk < 5) {
+    return 5
+  } else if (risk > 95) {
+    return 95
+  } else {
+    return risk
+  }
+}
 
 
 
@@ -104,22 +125,7 @@ dateRisk = () => {
 
 
   render() {
-   const dateRisk = () => {
-      const dateCreated = this.props.tickets.map(ticket => ticket.dateCreated)
-      const hours = new Date(dateCreated)
-      const newHours = hours.getHours()
-      console.log(dateCreated)
-      console.log(hours)
-      console.log(newHours)
-      if (newHours >= 9 && newHours <= 17) {
-        return console.log(-10)
-      } else {
-        return console.log(10)
-      }
-    }
 
-    dateRisk()
-    
 
     const { comments, ticket} = this.props 
     console.log('i mounted')
@@ -141,7 +147,7 @@ dateRisk = () => {
               <p>Id: {ticket.id}</p>
               <p>Price: {ticket.price}</p>
               <p>Date: {ticket.dateCreated}</p>
-              <p>Risk:</p>
+              <p>Risk of this ticket being fraudulent: {this.totalRisk()} % </p>
             </div>
             }  
         

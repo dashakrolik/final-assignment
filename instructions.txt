@@ -45,7 +45,7 @@ The percentage should be calculated using the following algorithm:
 +- Works but not sure if logic correct * if the ticket price is lower than the average ticket price for that event, that's a risk
 	* if a ticket is X% cheaper than the average price, add X% to the risk 
 	* if a ticket is X% more expensive than the average price, deduct X% from the risk, with a maximum of 10% deduction
-* if the ticket was added during business hours (9-17), deduct 10% from the risk, if not, add 10% to the risk
+++ * if the ticket was added during business hours (9-17), deduct 10% from the risk, if not, add 10% to the risk
 ++ * if there are >3 comments on the ticket, add 5% to the risk
 
 The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
@@ -128,6 +128,9 @@ Day3:
 - App still works fine so fraud
 - Added comments, commentform SUCCESS
 - Will work on risk for comments now
+- Risk for comments and date are done, need to test them altogether though
+- Risk is calculated and shows on the page, changes dynamically
+- However, still not a hundred percent sure the pricerisk is calculated correctly
 
 
 
