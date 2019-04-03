@@ -134,6 +134,8 @@ Day3:
 - TODO: Add color to risk displaying, add being able to edit tickets, pagination
 - TODO: Events that are not finished yet: use similar to what I used in daterisk
 - How to check if pricerisk really calculates fraud? write out on paper algebraically maybe
+- Stuck on editing an existing ticket
+- Will add color to risk stuff now
 
 
 

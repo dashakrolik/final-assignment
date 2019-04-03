@@ -38,11 +38,14 @@ export default class TicketsControlelr {
   @Authorized()
   @Put('/tickets/:id')
   async updateTicket(
+    @CurrentUser() user: User,
     @Param('id') id: number,
     @Body() update: Partial<Ticket>
   ) {
     const ticket = await Ticket.findOne(id)
     if (!ticket) throw new NotFoundError('Cannot find ticket')
+
+    if(user.id !== ticket.user.id) throw new NotFoundError("Cannot edit this ticket")
 
     return Ticket.merge(ticket, update).save()
   }

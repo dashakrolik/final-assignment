@@ -58,7 +58,6 @@ export const createTicket = (ticket) => (dispatch, getState) => {
     .catch(err => alert(err))
 }
 
-//creating still doesn;t work, smth is up with the endpoint propbably
 
 
 export const editTicket = (ticketId, data) => (dispatch, getState) => {

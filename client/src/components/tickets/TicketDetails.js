@@ -125,7 +125,7 @@ totalRisk = () => {
             {
               this.props.currentUser &&
               this.state.edit &&
-            <TicketForm initialValues={ticket} onSubmit={this.updateTicket} />
+            <TicketForm initialValues={ticket} onSubmit={this.editTicket} />
             }
             { !this.state.edit &&
             <div>
@@ -138,7 +138,7 @@ totalRisk = () => {
               <p>Date Created: {ticket.dateCreated}</p>
               <p>Risk of this ticket being fraudulent: {this.totalRisk()}% </p>
             
-            { this.props.currentUser && 
+            { this.props.currentUser && !this.state.edit &&
                 <button onClick={this.toggleEdit}>Edit ticket</button>
             }
             </div>

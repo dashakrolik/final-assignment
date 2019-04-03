@@ -8,43 +8,45 @@ export default class TicketForm extends PureComponent {
 		this.props.onSubmit(this.state)
 	}
 
-  handleChange = (event) => {
-    const { name, value } = event.target
+  handleChange = (ticket) => {
+    const { name, value } = ticket.target
 
     this.setState({
-      [name]: value
-    })
-  }
-
-
-
+			[name]: value
+		})
+	}
+	
 	render() {
 		const initialValues = this.props.initialValues || {}
+		console.log(this.state)
 		return (
 
-			<form onSubmit={this.props.handleSubmit}>
+			<form onSubmit={this.handleSubmit}>
 						<br></br>			<br></br>			<br></br>			<br></br>
 				<label>Url</label>
-					<input name="url" value={
+					<input name="url" id="url" value={
 						this.state.url !== null || undefined ? this.state.picture : initialValues.picture || ''
 					} onChange={ this.handleChange } />
 
         <label>Price</label>
-					<input name="price" value={
+					<input name="price" id="price" value={
 						this.state.price !== null || undefined ? this.state.price : initialValues.price || ''
 					} onChange={ this.handleChange } />
 
         <label>Date created</label>
-					<input name="dateCreated" value={
+					<input name="dateCreated" id="dateCreated" value={
 						this.state.dateCreated !== null || undefined ? this.state.dateCreated : initialValues.dateCreated || ''
 					} onChange={ this.handleChange } />
 
 				<label >Description</label>
-					<input name="description" value={
+					<input name="description" id="description" value={
 						this.state.description !== null || undefined ? this.state.description : initialValues.description || ''
 					} onChange={ this.handleChange } />
-<br></br>
+
+				<br></br>
+
 				<button type="submit">Submit</button>
+				
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 			</form>
 		)
