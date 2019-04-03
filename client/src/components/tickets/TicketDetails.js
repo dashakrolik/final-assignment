@@ -15,12 +15,6 @@ class TicketDetails extends PureComponent{
     this.props.loadSelectedComments(this.props.match.params.id) 
   }
 
-  componentDidMount() {
-    this.props.loadTicket(this.props.match.params.id)
-    this.props.loadTickets()
-    this.props.getUsers() 
-    this.props.loadSelectedComments(this.props.match.params.id) 
-  }
 
   toggleEdit = () => {
     this.setState({
@@ -131,9 +125,9 @@ totalRisk = () => {
             {
               this.props.currentUser &&
               this.state.edit &&
-            <TicketForm values={ticket} onSubmit={this.updateTicket} />
+            <TicketForm initialValues={ticket} onSubmit={this.updateTicket} />
             }
-            {
+            { !this.state.edit &&
             <div>
               <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
               <p>Seller email: {ticket.user.firstName}</p>
@@ -143,6 +137,10 @@ totalRisk = () => {
               <p>Price: {ticket.price}</p>
               <p>Date Created: {ticket.dateCreated}</p>
               <p>Risk of this ticket being fraudulent: {this.totalRisk()}% </p>
+            
+            { this.props.currentUser && 
+                <button onClick={this.toggleEdit}>Edit ticket</button>
+            }
             </div>
             }  
         
