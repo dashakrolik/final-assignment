@@ -65,7 +65,7 @@ priceRisk = () => {
   // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
 // 	* if a ticket is X% more expensive than the average price, 
 //deduct X% from the risk, with a maximum of 10% deduction
-  const risk = (-100 * oneTicketPrice / average - 100)
+  const risk = (100 * oneTicketPrice / average - 100)
   if (risk < -10) {
     return -10
   } else {
@@ -73,27 +73,11 @@ priceRisk = () => {
   }
 }
 
-priceRisk = () => {
-  const allTickets = this.props.tickets.length
-  console.log(allTickets)
-  const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
-  console.log(manyTicketsPrice)
-  const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
-  console.log(total)
-  const average = total / allTickets
-  console.log(average)
-  // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
-// 	* if a ticket is X% more expensive than the average price, 
-//deduct X% from the risk, with a maximum of 10% deduction
-  const risk = (100 * this.props.ticket.price / average - 100)
-  if (risk < -10) {
-    return risk-10
-  } else {
-    return risk
-  }
+
+// * if there are >3 comments on the ticket, add 5% to the risk
+commentRisk = () => {
+ const allComments = this.props.comments.length
 }
-
-
 
 
 
@@ -109,6 +93,22 @@ priceRisk = () => {
 
 
   render() {
+   const commentRisk = () => {
+      const allComments = this.props.comments.length
+      if (allComments > 3) {
+        return console.log(5) 
+      } else {
+        return console.log(0)
+      }
+    }
+
+  commentRisk()
+     
+
+
+
+
+
     const { comments, ticket} = this.props 
     console.log('i mounted')
     console.log('props', this.props.tickets)
@@ -156,7 +156,7 @@ priceRisk = () => {
         <CommentsForm onSubmit={this.createComment} />
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
-        
+
         </div>
         )
       } else {

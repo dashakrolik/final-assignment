@@ -21,11 +21,11 @@ A ticket is made for a specific event and has an author (the user that created t
 * a price ++ Integer
 * a description ++
 
-When you click on a ticket, you see the details of that ticket (description/price) ++ and which event it's for ++ . On this page you can add comments as a customer, and everybody can see all the comments.
+When you click on a ticket, you see the details of that ticket (description/price) ++ and which event it's for ++ . On this page you can add comments as a customer, and everybody can see all the comments. ++
 
 A comment has a text and is connected to a specific ticket. It also has an author. ++
 
-Anybody can view events and tickets, but you have to login to add a new ticket or comment. 
+Anybody can view events and tickets, but you have to login to add a new ticket or comment. ++
 
 ![Mockup of some pages of the app](https://cd.sseu.re/final-assignment-mockup.png)
 
@@ -123,6 +123,11 @@ Day 2:
 - Possibly, some CSS?
 - Finished on EventsList.js, was playing around with dates
 - ADD COMMENTS
+
+Day3:
+- App still works fine so fraud
+- Added comments, commentform SUCCESS
+- Will work on risk for comments now
 
 
 
