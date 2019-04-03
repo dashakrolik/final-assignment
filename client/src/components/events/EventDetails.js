@@ -19,6 +19,8 @@ class EventDetails extends PureComponent{
     this.props.createTicket(ticket)
   }
 
+  // IDEA: USE REDUCE EVERYWHERE TO ADJUST ALGORITHM< SHOULD WORK
+
   // authorRisk = () => {
   //   const authorId = this.props.tickets.map(tickets => {
   //     return tickets
@@ -159,7 +161,7 @@ class EventDetails extends PureComponent{
         }
       }
     }
-    // As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
+
 const mapStateToProps = function (state) {
   return {
     event: state.event,

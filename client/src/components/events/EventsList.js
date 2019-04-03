@@ -16,7 +16,25 @@ class EventsList extends PureComponent{
   
   render() {
     const {events} = this.props 
+    console.log(this.props.events)
+    // As a customer I only want to see events that are not finished yet
+    var MyDate = new Date();
+    console.log(MyDate)
+    var CurrenDateString;
+    
+    MyDate.setDate(MyDate.getDate());
+    
+    CurrenDateString = MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
 
+    console.log(CurrenDateString)
+
+    const eventDate = this.props.events.map(event => event.start)
+    const reducedEvents = eventDate.reduce((acc, value) => 
+    
+    acc + value, 0)
+
+    console.log(eventDate)
+    console.log(reducedEvents)
 
     return (
     <div>
