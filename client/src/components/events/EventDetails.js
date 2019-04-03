@@ -37,7 +37,9 @@ class EventDetails extends PureComponent{
   // * if the ticket price is lower than the average ticket price for that event, that's a risk
   priceRisk = () => {
     const allTickets = this.props.tickets.length
-    const oneTicketPrice = this.props.ticket.price
+    const oneTicketPrice = this.props.tickets.map(tickets => {
+      return console.log(tickets.price)
+    })
     const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
     const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
     const average = total / allTickets
@@ -55,7 +57,9 @@ class EventDetails extends PureComponent{
   
   // * if there are >3 comments on the ticket, add 5% to the risk
   commentRisk = () => {
-    const allComments = this.props.comments.length
+    const allComments = this.props.tickets.map(tickets => {
+      return console.log(tickets.comments.length)
+    })
     if (allComments > 3) {
       return 5
     } else {
@@ -66,7 +70,9 @@ class EventDetails extends PureComponent{
   // if the ticket was added during business hours (9-17), 
   //deduct 10% from the risk, if not, add 10% to the risk
   dateRisk = () => {
-    const dateCreated = this.props.ticket.dateCreated
+    const dateCreated = this.props.tickets.map(tickets => {
+      return console.log(tickets.dateCreated)
+    })
     const hours = new Date(dateCreated)
     const newHours = hours.getHours()
     if (newHours >= 9 && newHours <= 17) {
