@@ -1,4 +1,3 @@
-
 import users from './users'
 import login from './login'
 import currentUser from './currentUser'
@@ -7,6 +6,7 @@ import events from './events'
 import event from './event'
 import tickets from './tickets'
 import ticket from './ticket'
+import comments from './comments'
 
 
 export default {
@@ -17,5 +17,6 @@ export default {
   events,
   event,
   tickets,
-  ticket
+  ticket,
+  comments
 }
