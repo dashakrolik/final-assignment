@@ -13,9 +13,6 @@ class EventsList extends PureComponent{
     this.props.loadEvents()
     this.props.getUsers()
   }
-
-
-
   
   render() {
     const {events} = this.props 

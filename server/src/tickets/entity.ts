@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, MinLength } from 'class-validator'
 import User from '../users/entity'
@@ -25,8 +25,8 @@ export default class Ticket extends BaseEntity {
   @Column('integer')
   price: number
 
-  @Column('timestamp', {nullable:false})
-  dateCreated: string
+  @CreateDateColumn({type: 'timestamp'})
+  dateCreated: Date
 
   
   @ManyToOne(_ => User, user => user.tickets, {eager:true})

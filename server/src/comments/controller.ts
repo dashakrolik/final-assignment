@@ -5,18 +5,13 @@ import User from '../users/entity'
 @JsonController()
 export default class CommentsController {
 
-    @Get('/comments')
-    async allComments() {
-        const comments = await Comment.find()
+    @Get('/tickets/comments/:ticketId')
+    async allComments(
+        @Param('ticketId') id: number
+    ) {
+        const comments = await Comment.find({where: {ticket: id}})
         return { comments }
     }   
-   
-    @Get('/comments/:id([0-9]+)')
-    getComment(
-        @Param('id') id: number
-    ) {
-        return Comment.findOne(id)
-    }  
 
     @Authorized()
     @Post('/comments')

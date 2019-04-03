@@ -90,7 +90,7 @@ We don't want you to publish the code of your final assignment on GitHub during 
 * Show us what you've learned in the past weeks!
 * Have fun
 * Don't forget to sleep
-Collapse
+
 
 
 
@@ -110,6 +110,19 @@ Day 1:
 - List with events is now displayed
 - Items on the list are now clickable and redirect to a page with the details about this specific event
 - See notes in TicketDetails.js
+
+Day 2:
+- Redesigned the app, deleted containers on the frontend
+- Edited relations in api 
+- SUCCESS: 5/10 user stories complete
+- Halfway through the risk algorithm - how to display on page?
+- Showing only current events: low prio, as it is an easy task
+- Pagination: investigate
+- Add editing of your own tickets, remember auth in Spotify app
+- So basically just need to finish the risk algorithm
+- Possibly, some CSS?
+- Finished on EventsList.js, was playing around with dates
+- ADD COMMENTS
 
 
 
