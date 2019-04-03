@@ -76,9 +76,20 @@ priceRisk = () => {
 
 // * if there are >3 comments on the ticket, add 5% to the risk
 commentRisk = () => {
- const allComments = this.props.comments.length
+  const allComments = this.props.comments.length
+  if (allComments > 3) {
+    return 5
+  } else {
+    return 0
+  }
 }
 
+// if the ticket was added during business hours (9-17), 
+//deduct 10% from the risk, if not, add 10% to the risk
+dateRisk = () => {
+  const dateCreated = this.props.tickets.dateCreated
+  //"2019-04-03T07:11:36.789Z"
+}
 
 
 
@@ -93,21 +104,22 @@ commentRisk = () => {
 
 
   render() {
-   const commentRisk = () => {
-      const allComments = this.props.comments.length
-      if (allComments > 3) {
-        return console.log(5) 
+   const dateRisk = () => {
+      const dateCreated = this.props.tickets.map(ticket => ticket.dateCreated)
+      const hours = new Date(dateCreated)
+      const newHours = hours.getHours()
+      console.log(dateCreated)
+      console.log(hours)
+      console.log(newHours)
+      if (newHours >= 9 && newHours <= 17) {
+        return console.log(-10)
       } else {
-        return console.log(0)
+        return console.log(10)
       }
     }
 
-  commentRisk()
-     
-
-
-
-
+    dateRisk()
+    
 
     const { comments, ticket} = this.props 
     console.log('i mounted')
