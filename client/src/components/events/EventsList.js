@@ -16,26 +16,35 @@ class EventsList extends PureComponent{
   
   render() {
     const {events} = this.props 
-    console.log(this.props.events)
-    // As a customer I only want to see events that are not finished yet
-    var MyDate = new Date();
-    console.log(MyDate)
-    var CurrenDateString;
-    
-    MyDate.setDate(MyDate.getDate());
-    
-    CurrenDateString = MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
 
+    var MyDate = new Date();
+    var CurrenDateString;
+    MyDate.setDate(MyDate.getDate());
+    CurrenDateString = MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
     console.log(CurrenDateString)
 
     const eventDate = this.props.events.map(event => event.start)
-    const reducedEvents = eventDate.reduce((acc, value) => 
-    
-    acc + value, 0)
-
     console.log(eventDate)
-    console.log(reducedEvents)
 
+    //Compare the array of dates to currentdate
+    const dateComparison = () => {
+      let array = this.props.events.map(event => event.start)
+      let MyDate = new Date();
+      let CurrenDateString;
+      MyDate.setDate(MyDate.getDate());
+      CurrenDateString = MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
+      let value1 = CurrenDateString;  //compare to current date
+      let value2 = "2019-04-05";  //is in array
+
+      function isInArray(array, value) {
+      return (array.find(item => {return item === value}) || []).length > 0;
+}
+
+console.log(isInArray(array, value1));
+console.log(isInArray(array, value2));
+    }
+    
+    dateComparison()
     return (
     <div>
       <br></br><br></br><br></br><br></br><br></br>
