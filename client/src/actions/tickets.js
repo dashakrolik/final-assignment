@@ -9,6 +9,9 @@ export const TICKET_CREATE = 'TICKET_CREATE'
 export const EDIT_TICKET = 'EDIT_TICKET'
 export const SELECTED_TICKETS_FETCHED = 'SELECTED_TICKETS_FETCHED' //Selected all
 
+
+
+
 export const loadTickets = () => (dispatch) => {
     request
     .get(`${baseUrl}/tickets`)

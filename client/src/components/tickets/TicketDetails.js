@@ -16,13 +16,6 @@ class TicketDetails extends PureComponent{
     this.props.loadSelectedComments(this.props.match.params.id) 
   }
 
-
-  toggleEdit = () => {
-    this.setState({
-      edit: !this.state.edit
-    })
-  }
-
   editTicket = (ticket) => {
     this.props.editTicket(this.props.match.params.id, ticket)
     this.toggleEdit()
@@ -44,7 +37,6 @@ authorRisk = () => {
   const authorTickets = authorId.filter(author => {
     return author = this.props.ticket.user.id
   }).length
-  console.log(authorTickets)
   if (authorTickets === 1) {
     return 10 
   } else {
@@ -130,22 +122,17 @@ riskColor = (risk) => {
 // As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
 
   render() {
-
-
     const { comments, ticket} = this.props 
-    console.log('i mounted')
-    console.log('props', this.props.tickets)
       if (ticket) {
-        const riskToRedux = this.totalRisk()
-        console.log(riskToRedux)
         return(
           <div>
             {
               this.props.currentUser &&
               this.state.edit &&
-            <TicketForm initialValues={ticket} onSubmit={this.editTicket} />
+              <TicketForm initialValues={ticket} onSubmit={this.editTicket} />
             }
-            { !this.state.edit &&
+            { 
+              !this.state.edit &&
             <div>
               <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
               <p>Seller email: {ticket.user.firstName}</p>
@@ -156,9 +143,9 @@ riskColor = (risk) => {
               <p>Date Created: {ticket.dateCreated}</p>
               <p style={this.riskColor(this.totalRisk())}>Risk of this ticket being fraudulent: {this.totalRisk()}%  </p>
             
-            { this.props.currentUser && !this.state.edit &&
-                <button onClick={this.toggleEdit}>Edit ticket</button>
-            }
+              { this.props.currentUser && !this.state.edit &&
+                  <button onClick={this.toggleEdit}>Edit ticket</button>
+              }
             </div>
             }  
         
@@ -167,23 +154,24 @@ riskColor = (risk) => {
               <br></br><br></br>
               <p>Comments</p>
                 { comments.map(comment => (
-            <div>
-              <p>User email: {comment.user.email}</p>
-              <p>Comment: {comment.content}</p>
-            </div>)) }  
-        </div>
+                  <div>
+                    <p>User email: {comment.user.email}</p>
+                    <p>Comment: {comment.content}</p>
+                  </div>)) 
+                }  
+            </div>
 
-        {
-         this.props.currentUser && 
-         <div>
-           <p>Create a new comment</p>
-           <CommentsForm onSubmit={this.createComment} />
-         </div>
-        }
-        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+            {
+              this.props.currentUser && 
+                <div>
+                  <p>Create a new comment</p>
+                  <CommentsForm onSubmit={this.createComment} />
+                </div>
+            }
+              <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
 
-        </div>
+          </div>
         )
       } else {
         return (<div><p>There is no such ticket</p></div>)

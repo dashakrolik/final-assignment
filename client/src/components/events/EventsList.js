@@ -35,15 +35,17 @@ class EventsList extends PureComponent{
     <div>
       <br></br><br></br><br></br><br></br><br></br>
         <h1>Events</h1>
-          { this.state.map(event => 
+          { 
+            this.state.map(event => 
             (<div key={event.id}>
             <img src={event.url}/>
             <p><Link to={`/events/${event.id}`}>{event.name}</Link></p>
-           </div>)) 
+            </div>)) 
           } 
-        { this.props.currentUser &&
-        <div><h2>Add event</h2><EventForm onSubmit={this.createEvent} />
-        </div>
+          { 
+          this.props.currentUser &&
+          <div><h2>Add event</h2><EventForm onSubmit={this.createEvent} />
+          </div>
         }
       <br></br><br></br><br></br><br></br><br></br>
     </div>

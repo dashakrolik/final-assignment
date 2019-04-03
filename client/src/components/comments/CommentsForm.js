@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 
 
 export default class CommentsForm extends PureComponent {
-  state = { }
+  state = {}
 
   handleChange = (comment) => {
     const {name, value} = comment.target
@@ -24,7 +24,6 @@ export default class CommentsForm extends PureComponent {
 					<input name="content" value={
 						this.state.content !== undefined ? this.state.content : values.content || ''
 					} onChange={ this.handleChange } />
-
 				<button type="submit">Submit Comment</button>
 			</form>
 		)

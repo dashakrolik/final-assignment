@@ -1,6 +1,6 @@
 import { 
   TICKET_FETCHED,
-  EDIT_TICKET
+  EDIT_TICKET,
   
 } from "../actions/tickets";
 
@@ -9,10 +9,12 @@ export default function(state = null, action) {
   case TICKET_FETCHED:
     return action.payload
 
+
   case EDIT_TICKET:
   if (action.payload.id === state.id) {
     return action.payload
   }
+
   else return state
 
   default:
