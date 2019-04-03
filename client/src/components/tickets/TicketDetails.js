@@ -16,6 +16,12 @@ class TicketDetails extends PureComponent{
     this.props.loadSelectedComments(this.props.match.params.id) 
   }
 
+  toggleEdit = () => {
+    this.setState({
+      edit: !this.state.edit
+    })
+  }
+
   editTicket = (ticket) => {
     this.props.editTicket(this.props.match.params.id, ticket)
     this.toggleEdit()
