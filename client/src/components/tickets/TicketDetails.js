@@ -5,6 +5,7 @@ import { getUsers } from '../../actions/users'
 import TicketForm from './TicketForm'
 import { createComment, loadSelectedComments, loadComments } from '../../actions/comments'
 import CommentsForm from '../comments/CommentsForm'
+import './TicketDetails.css'
 
 class TicketDetails extends PureComponent{
  state = { edit: false }
@@ -111,7 +112,7 @@ totalRisk = () => {
 }
 
 //End of code for risk
-
+// As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
 
   render() {
 
@@ -120,6 +121,8 @@ totalRisk = () => {
     console.log('i mounted')
     console.log('props', this.props.tickets)
       if (ticket) {
+        const riskToRedux = this.totalRisk()
+        console.log(riskToRedux)
         return(
           <div>
             {
@@ -136,7 +139,7 @@ totalRisk = () => {
               <p>Ticket Id: {ticket.id}</p>
               <p>Price: {ticket.price}</p>
               <p>Date Created: {ticket.dateCreated}</p>
-              <p>Risk of this ticket being fraudulent: {this.totalRisk()}% </p>
+              <p className="riskTicketDetails">Risk of this ticket being fraudulent: {this.totalRisk()}% </p>
             
             { this.props.currentUser && !this.state.edit &&
                 <button onClick={this.toggleEdit}>Edit ticket</button>

@@ -53,7 +53,7 @@ class EventDetails extends PureComponent{
         }
       }
     }
-
+    // As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
 const mapStateToProps = function (state) {
   return {
     event: state.event,

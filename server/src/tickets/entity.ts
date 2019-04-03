@@ -25,6 +25,9 @@ export default class Ticket extends BaseEntity {
   @Column('integer')
   price: number
 
+  @Column('integer', { nullable: true })
+  risk: number
+
   @CreateDateColumn({type: 'timestamp'})
   dateCreated: Date
 

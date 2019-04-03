@@ -10,7 +10,9 @@ import EventDetails from './components/events/EventDetails'
 import TicketDetails from './components/tickets/TicketDetails'
 
 
+
 class App extends Component {
+
   render() {
     return (
       <Router>

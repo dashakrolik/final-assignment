@@ -16,15 +16,6 @@ class EventsList extends PureComponent{
   
   render() {
     const {events} = this.props 
-    const getCurrentDate = () => {
-      var d = Date();
-      var currentDate = d.toString()
-      return currentDate
-      }
-
-    const printDate = getCurrentDate()
-
-    console.log(printDate)
 
 
     return (
@@ -35,8 +26,12 @@ class EventsList extends PureComponent{
             (<div key={event.id}>
             <img src={event.url}/>
             <p><Link to={`/events/${event.id}`}>{event.name}</Link></p>
-           </div>)) } 
-        {<div><h1>Add event</h1><EventForm onSubmit={this.createEvent} /></div>}
+           </div>)) 
+          } 
+        { this.props.currentUser &&
+        <div><h2>Add event</h2><EventForm onSubmit={this.createEvent} />
+        </div>
+        }
       <br></br><br></br><br></br><br></br><br></br>
     </div>
     )
