@@ -35,6 +35,8 @@ class TicketDetails extends PureComponent{
   
   //Start of code for risk
 // * if the ticket is the only ticket of the author, add 10% ++
+
+
 authorRisk = () => {
   const authorId = this.props.tickets.map(ticket => {
     return ticket.user.id
@@ -111,6 +113,19 @@ totalRisk = () => {
   }
 }
 
+riskColor = (risk) => {
+  if (risk < 30) {
+    const color = {color: 'green'}
+    return color
+  } else if (risk >= 30) {
+    const color = {color: 'red'}
+    return color
+  } else {
+    const color = {color: 'orange'}
+    return color
+  }
+}
+
 //End of code for risk
 // As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
 
@@ -139,7 +154,7 @@ totalRisk = () => {
               <p>Ticket Id: {ticket.id}</p>
               <p>Price: {ticket.price}</p>
               <p>Date Created: {ticket.dateCreated}</p>
-              <p className="riskTicketDetails">Risk of this ticket being fraudulent: {this.totalRisk()}% </p>
+              <p style={this.riskColor(this.totalRisk())}>Risk of this ticket being fraudulent: {this.totalRisk()}%  </p>
             
             { this.props.currentUser && !this.state.edit &&
                 <button onClick={this.toggleEdit}>Edit ticket</button>
