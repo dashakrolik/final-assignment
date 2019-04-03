@@ -5,6 +5,7 @@ import {isExpired} from '../jwt'
 
 export const COMMENT_CREATE = 'COMMENT_CREATE'
 export const SELECTED_COMMENTS_FETCHED = 'SELECTED_COMMENTS_FETCHED' //Selected all
+export const ALL_COMMENTS_FETCHED = 'ALL_COMMENTS_FETCHED'
 
 
 export const createComment = (comment) => (dispatch, getState) => {
@@ -13,7 +14,7 @@ export const createComment = (comment) => (dispatch, getState) => {
 
     if (isExpired(jwt)) return dispatch(logout())
     request
-    .post(`${baseUrl}/tickets/comments/${ticketId}`)
+    .post(`${baseUrl}/comments`)
     .set('Authorization', `Bearer ${jwt}`)
     .send(comment)
     .then(response => dispatch({
@@ -33,5 +34,16 @@ export const loadSelectedComments = (ticketId) => (dispatch) => {
     }))
     .catch(err => alert(err))
   }
+
+  export const loadComments = () => (dispatch) => {
+    request
+    .get(`${baseUrl}/comments`)
+     .then(response => dispatch({
+       type: ALL_COMMENTS_FETCHED,
+       payload: response.body.comments
+     }))
+     .catch(err => alert(err))
+}
+
 
 

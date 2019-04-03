@@ -19,7 +19,7 @@ export default class EventForm extends PureComponent {
 	render() {
 		const values = this.props.values || {}
 		return (
-			<form onSubmit={this.handleSubmit} className='createEventForm'>
+			<form onSubmit={this.handleSubmit}>
 				<label>Event name</label>
 					<input name="name" value={
 						this.state.name !== undefined ? this.state.name : values.name || ''
@@ -45,7 +45,7 @@ export default class EventForm extends PureComponent {
 						this.state.end !== undefined ? this.state.end : values.end || ''
 					} onChange={ this.handleChange } />
 
-				<button type="submit" className='btn'>Submit</button>
+				<button type="submit">Submit</button>
 			</form>
 		)
 	}
