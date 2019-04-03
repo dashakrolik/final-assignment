@@ -50,15 +50,15 @@ The percentage should be calculated using the following algorithm:
 
 The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
 
-The calculated risk of a ticket depends on many factors. Make sure that the risk value is always "live" (i.e. up to date).
+The calculated risk of a ticket depends on many factors. Make sure that the risk value is always "live" (i.e. up to date). ++
 
 ## User stories
 
 * As a customer I want to see max. 9 events on a page and be able to click 'next' to see more pages of events if there are more ?? pagination??
 * As a customer I only want to see events that are not finished yet ##TODO
-* As a customer I want to view a list of tickets when I click on an event ++ DONE
+* As a customer I want to view a list of tickets when I click on an event ++ 
 * As a customer I want to view ticket details when I click on a ticket in the ticket list ++
-* As a customer I want to see what the fraud-risk is for a specific ticket ##TODO
+* As a customer I want to see what the fraud-risk is for a specific ticket ++
 * As a customer I want to be able to login, or sign up if I don't have an account yet ++
 * As a logged in customer I want to add a ticket (for a specific event) that shows up on the event page with a title, picture, price and description ++
 * As an author of the ticket I want to be able to edit a ticket's description, price and picture (other logged in customers cannot do this! only authors and admins)
@@ -125,12 +125,15 @@ Day 2:
 - ADD COMMENTS
 
 Day3:
-- App still works fine so fraud
+- App still works fine so far
 - Added comments, commentform SUCCESS
 - Will work on risk for comments now
 - Risk for comments and date are done, need to test them altogether though
 - Risk is calculated and shows on the page, changes dynamically
 - However, still not a hundred percent sure the pricerisk is calculated correctly
+- TODO: Add color to risk displaying, add being able to edit tickets, pagination
+- TODO: Events that are not finished yet: use similar to what I used in daterisk
+- How to check if pricerisk really calculates fraud? write out on paper algebraically maybe
 
 
 
