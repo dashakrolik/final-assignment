@@ -25,7 +25,7 @@ export default class TicketForm extends PureComponent {
 						<br></br>			<br></br>			<br></br>			<br></br>
 				<label>Url</label>
 					<input name="url" id="url" value={
-						this.state.url !== null || undefined ? this.state.picture : initialValues.picture || ''
+						this.state.url !== null || undefined ? this.state.url : initialValues.url || ''
 					} onChange={ this.handleChange } />
 
         <label>Price</label>
