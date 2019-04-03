@@ -3,19 +3,23 @@ import { connect } from 'react-redux';
 import { loadTicket, editTicket, loadTickets } from '../../actions/tickets'
 import { getUsers } from '../../actions/users'
 import TicketForm from './TicketForm'
+import { createComment, loadSelectedComments, loadComments } from '../../actions/comments'
+import CommentsForm from '../comments/CommentsForm'
 
 class TicketDetails extends PureComponent{
  state = { edit: false }
   componentWillMount() {
     this.props.loadTicket(this.props.match.params.id)
     this.props.loadTickets()
-    this.props.getUsers() 
+    this.props.getUsers()
+    this.props.loadSelectedComments(this.props.match.params.id) 
   }
 
   componentDidMount() {
     this.props.loadTicket(this.props.match.params.id)
     this.props.loadTickets()
     this.props.getUsers() 
+    this.props.loadSelectedComments(this.props.match.params.id) 
   }
 
   toggleEdit = () => {
@@ -25,9 +29,14 @@ class TicketDetails extends PureComponent{
   }
 
   editTicket = (ticket) => {
-        this.props.editTicket(this.props.match.params.id, ticket)
-        this.toggleEdit()
-    }
+    this.props.editTicket(this.props.match.params.id, ticket)
+    this.toggleEdit()
+  }
+
+  createComment = (comment) => {
+    comment.ticket = this.props.ticket
+    this.props.createComment(comment)
+  }
   
   //Start of code for risk
 // * if the ticket is the only ticket of the author, add 10% ++
@@ -100,36 +109,54 @@ priceRisk = () => {
 
 
   render() {
-    const {ticket} = this.props 
-
-
- 
-
-
-
-    
+    const { comments, ticket} = this.props 
     console.log('i mounted')
     console.log('props', this.props.tickets)
-
       if (ticket) {
-      return(
-      <div>
-      {
-        this.props.currentUser &&
-        this.state.edit &&
-        <TicketForm values={ticket} onSubmit={this.updateTicket} />
+        return(
+          <div>
+            {
+              this.props.currentUser &&
+              this.state.edit &&
+            <TicketForm values={ticket} onSubmit={this.updateTicket} />
+            }
+            {
+            <div>
+              <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+              <p>Seller email: {ticket.user.firstName}</p>
+              <p>URL: {ticket.url}</p>
+              <p>Description: {ticket.description}</p>
+              <p>Id: {ticket.id}</p>
+              <p>Price: {ticket.price}</p>
+              <p>Date: {ticket.dateCreated}</p>
+              <p>Risk:</p>
+            </div>
+            }  
+        
+            
+            <div>
+              <br></br><br></br>
+              <p>Comments</p>
+                { comments.map(comment => (
+            <div>
+              <p>User email: {comment.user.email}</p>
+              <p>Comment: {comment.content}</p>
+            </div>)) }  
+        </div>
+
+        {
+         this.props.currentUser && 
+         <div>
+           <p>Create a new comment</p>
+           <CommentsForm onSubmit={this.createComment} />
+         </div>
         }
-        {<div>
-          <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-          <p>Seller email: {ticket.user.firstName}</p>
-          <p>URL: {ticket.url}</p>
-          <p>Description: {ticket.description}</p>
-          <p>Id: {ticket.id}</p>
-          <p>Price: {ticket.price}</p>
-          <p>Date: {ticket.dateCreated}</p>
-          <p>Risk:</p>
-          </div>
-        }
+
+
+        <CommentsForm onSubmit={this.createComment} />
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+        
         </div>
         )
       } else {
@@ -144,11 +171,12 @@ const mapStateToProps = function (state) {
     currentUser: state.currentUser,
     event: state.event,
     tickets: state.tickets,
-    users: state.users
+    users: state.users,
+    comments: state.comments
   }
 }
 
-export default connect(mapStateToProps, { loadTicket, editTicket, loadTickets, getUsers })(TicketDetails)
+export default connect(mapStateToProps, { loadTicket, editTicket, loadTickets, getUsers, createComment, loadSelectedComments, loadComments })(TicketDetails)
 
 // ## !! Fraud risk algorithm !!
 
