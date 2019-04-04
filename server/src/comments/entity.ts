@@ -29,3 +29,8 @@ export default class Comment extends BaseEntity {
 // A comment has a text and is connected to a specific ticket. It also has an author. 
 
 // Anybody can view events and tickets, but you have to login to add a new ticket or comment. 
+//Ltlle pizza poem
+// Tomatoes and cheese on 
+// dough is what a pizza is
+//  dogs cats clouds boom
+//   breakfast hohoho
