@@ -54,7 +54,7 @@ The calculated risk of a ticket depends on many factors. Make sure that the risk
 
 ## User stories
 
-* As a customer I want to see max. 9 events on a page and be able to click 'next' to see more pages of events if there are more ?? pagination??
+* As a customer I want to see max. 9 events on a page and be able to click 'next' to see more pages of events if there are more NO
 * As a customer I only want to see events that are not finished yet ++
 * As a customer I want to view a list of tickets when I click on an event ++ 
 * As a customer I want to view ticket details when I click on a ticket in the ticket list ++
@@ -145,6 +145,13 @@ Day3:
 - Have to rewrite algorithm so that I could show risk for all tickets in the list
 
 
-
-
+Day 4:
+- App works, with occasional errors when doing a POST request - issue solved by reloading the page
+- Risk algo for all tickets on the list - halfway through but stuck after reducing, mapping for the first part to work
+- How to reduce so as to extract value per needed instance?
+- One more step has to happen after that as well - comparing one generated array to the other
+- I won't do pagination, we haven't done it in TypeORM and can't find any tutorials online, npm packages for frontend pagination don't work for made
+- 8.5 user stories complete
+- TODO: 1. finish algorithm 2. add CSS, my app is ugly
+- * if there is time, investigate why the occasional POST request errors occur
 

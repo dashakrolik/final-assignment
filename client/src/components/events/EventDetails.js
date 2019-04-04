@@ -105,10 +105,15 @@ class EventDetails extends PureComponent{
   // if the ticket was added during business hours (9-17), 
   //deduct 10% from the risk, if not, add 10% to the risk
   dateRisk = () => {
-    const dateCreated = this.props.tickets.map(tickets => { //CORRECT, RETURNS ARRAY OF DATES
+    const dateCreated = this.props.tickets.map(tickets => { //CORRECT, RETURNS ARRAY OF DATES WHEN THE TICKET WAS CREATED 
       return tickets.dateCreated
     })
-   
+    // transform array = for every date in array, replace with only hour of creation
+   // assign every creation hour a corresponding ticket id, must return object(key = ticket.id, value=hour)
+   // push to new array, must return an array of objects
+    //for every object in array, check if hour is between 9 and 17 (if statement)
+    //for every object whose hour is between 9 and 17 return -10
+    // else return 10
     console.log(dateCreated)
   }
   
