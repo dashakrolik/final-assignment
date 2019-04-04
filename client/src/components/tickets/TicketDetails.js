@@ -129,6 +129,7 @@ riskColor = (risk) => {
 
   render() {
     const { comments, ticket} = this.props 
+    console.log(this.props.tickets)
       if (ticket) {
         return(
           <div>
