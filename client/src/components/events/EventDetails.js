@@ -50,12 +50,18 @@ class EventDetails extends PureComponent{
   // * if the ticket price is lower than the average ticket price for that event, that's a risk
   priceRisk = () => {
     const allTickets = this.props.tickets.length
-    const oneTicketPrice = this.props.tickets.map(tickets => {
+    console.log(allTickets)
+    const oneTicketPrice = this.props.tickets.map(tickets => { //THIS IS NOT CORRECT
       return tickets.price
     })
-    const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
-    const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
-    const average = total / allTickets
+    console.log(oneTicketPrice) 
+    const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price) //CORRECT
+    console.log(manyTicketsPrice)
+    const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0) // CORRECT
+
+    console.log(total)
+    const average = total / allTickets // CORRECT
+    console.log(average) 
     // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
   // 	* if a ticket is X% more expensive than the average price, 
   //deduct X% from the risk, with a maximum of 10% deduction
@@ -71,6 +77,8 @@ class EventDetails extends PureComponent{
   // * if there are >3 comments on the ticket, add 5% to the risk
   commentsRisk = () => {
   const numCommentsByTicket = this.props.tickets
+  //Reduce, calculate length of array
+
   console.log(numCommentsByTicket)
   const value = numCommentsByTicket.reduce((counts, ticket) => {
     counts[ticket.comments.id] = (counts[ticket.comments.id] || 0) + 1;
@@ -142,20 +150,9 @@ class EventDetails extends PureComponent{
 const result = this.authorsRisk()
 console.log(result)
 
-// why error
-const numTicketsByAuthor = this.props.tickets.reduce((counts, ticket) => {
-  counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
-  return counts;
-}, []);
 
-const authorRisk = (ticket, numTicketsByAuthor) => {
-  const numAuthorTickets = numTicketsByAuthor[ticket.user.id];
-  if (numAuthorTickets === 1) {
-    return 10;
-  } else {
-   return 0;
-  }
-}
+const price = this.priceRisk()
+console.log(price)
 
 const date = this.dateRisk()
 console.log(date)
