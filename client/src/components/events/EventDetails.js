@@ -111,6 +111,7 @@ class EventDetails extends PureComponent{
     })
     console.log(dateCreated)
     // transform array = for every date in array, replace with only hour of creation
+    // var dateArray = input.split('/'); ?
    // assign every creation hour a corresponding ticket id, must return object(key = ticket.id, value=hour)
    // push to new array, must return an array of objects
     //for every object in array, check if hour is between 9 and 17 (if statement)

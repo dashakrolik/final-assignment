@@ -76,7 +76,14 @@ commentRisk = () => {
 // if the ticket was added during business hours (9-17), deduct 10% from the risk, if not, add 10% to the risk
 dateRisk = () => {
   const dateCreated = this.props.ticket.dateCreated
+  console.log(dateCreated)
+
+  //changing UTC date to CET date
   const hours = new Date(dateCreated)
+  const hours1 = hours.toLocaleString({ timeZone: 'CET'})
+  //
+
+  console.log(hours1)
   const newHours = hours.getHours()
   if (newHours >= 9 && newHours <= 17) {
     return -10
