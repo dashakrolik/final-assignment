@@ -11,14 +11,12 @@ class EventDetails extends PureComponent{
     this.props.loadEvent(this.props.match.params.id) 
     this.props.loadSelectedTickets(this.props.match.params.id)
     this.props.getUsers()
-
   }
 
   createTicket = (ticket) => {
     ticket.event = this.props.event
     this.props.createTicket(ticket)
   }
-
 
   // if the ticket is the only ticket of the author, add 10%
   //increment by 1
@@ -167,15 +165,15 @@ class EventDetails extends PureComponent{
             <p>Starts on: {event.start}</p>
             <p>Ends on: {event.end}</p>
               <ul>
-                <li>Event name: {event.name}</li>
-                <li>Description: {event.description}</li>
+                <li key={event.name}>Event name: {event.name}</li>
+                <li key={event.description}>Description: {event.description}</li>
               </ul>
             {tickets.map(ticket => (
               <ul>
-                <li>{ticket.user.email}</li>
-                <li>{ticket.price}</li>
-                <li>{ticket.description}</li>
-                <li>{ticket.dateCreated}</li>
+                <li key={ticket.user.email}>{ticket.user.email}</li>
+                <li key={ticket.price}>{ticket.price}</li>
+                <li key={ticket.description}>{ticket.description}</li>
+                <li key={ticket.id}>{ticket.dateCreated}</li>
                 <li>Risk: </li>
                 <li><Link to={`/tickets/${ticket.id}`}>Ticket details</Link></li>
               </ul>))}
