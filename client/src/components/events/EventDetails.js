@@ -31,8 +31,19 @@ class EventDetails extends PureComponent{
       counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
       return counts;
     }, {});
+    let array = []
     console.log(value)
-
+    array.push(value)
+    console.log(array)
+    // value = object with key of user id and a number of tickets for that user
+    
+      // const numAuthorTickets = value[ticket.user.id];
+    //   if (numAuthorTickets === 1) {
+    //     return console.log(10);
+    //   } else {
+    //    return console.log(0);
+      
+    // }
     
   }
   
