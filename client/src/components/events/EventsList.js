@@ -4,6 +4,8 @@ import { loadEvents, createEvent } from '../../actions/events';
 import { Link } from 'react-router-dom';
 import EventForm from './EventForm';
 import { getUsers } from '../../actions/users';
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 
 
 class EventsList extends PureComponent{
@@ -32,6 +34,7 @@ class EventsList extends PureComponent{
  
     return (
     <div>
+      <Typography  variant="eventsList" align="center" color="inherit" style={{flex: 1}}></Typography>
       <br></br><br></br><br></br><br></br><br></br>
         <h1>Events</h1>
           { 

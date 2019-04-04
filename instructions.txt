@@ -159,11 +159,11 @@ Day 4:
 
 
 Before the demo
-- Add first name to form => send to db
+- DONE Add first name to form => send to db DONE
 - Make sure CORS chrome extension is off, else error with jwt token
 - Add error codes to API when not authorized or error with input constraints
 - Add events (current & not current date)
 - Add tickets adding up to a normal distribution qua price to display risk algo
 - Sign up as different users
-- Check again logging in / signing up - allowing to add events / tickets only when auth
-- CSS, make pretty
+- DONE Check again logging in / signing up - allowing to add events / tickets only when auth
+- CSS, make pretty!!!!!!!!!!!!!!!!!!!
