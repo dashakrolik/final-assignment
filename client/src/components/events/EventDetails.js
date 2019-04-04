@@ -36,8 +36,8 @@ class EventDetails extends PureComponent{
     array.push(value)
     console.log(array)
     // value = object with key of user id and a number of tickets for that user
-    
-      // const numAuthorTickets = value[ticket.user.id];
+    //ERRORING LINE BELOW
+    // const numAuthorTickets = value[ticket.user.id];
     //   if (numAuthorTickets === 1) {
     //     return console.log(10);
     //   } else {
@@ -90,7 +90,7 @@ class EventDetails extends PureComponent{
   //deduct 10% from the risk, if not, add 10% to the risk
   dateRisk = () => {
     const dateCreated = this.props.tickets.map(tickets => {
-      return tickets.dateCreated
+      return console.log(tickets.dateCreated)
     })
     const hours = new Date(dateCreated)
     console.log(dateCreated)
@@ -149,7 +149,8 @@ const authorRisk = (ticket, numTicketsByAuthor) => {
   }
 }
 
-console.log(authorRisk)
+const date = this.dateRisk()
+console.log(date)
 
 
 
