@@ -25,22 +25,22 @@ class EventDetails extends PureComponent{
 //increment by 1
 //to count the tickets
 // numTicketsByAuthor will print smth like... {1: 15, 2: 4} [userId]: numberOfTickets
-  authorRisk = () => {
-    const numTicketsByAuthor = this.props.tickets.reduce((counts, ticket) => {
+  authorsRisk = () => {
+    const numTicketsByAuthor = this.props.tickets
+    const value = numTicketsByAuthor.reduce((counts, ticket) => {
       counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
       return counts;
     }, {});
+    console.log(value)
+
     
-    const authorRisk = (ticket, numTicketsByAuthor) => {
-      const numAuthorTickets = numTicketsByAuthor[ticket.user.id];
-      if (numAuthorTickets === 1) {
-        return 10;
-      } else {
-       return 0;
-      }
-    }
   }
   
+  rewrittenRisk = () => {
+    const numTicketsByAuthor = this.props.tickets
+    const value = ''
+  }
+
   // * if the ticket price is lower than the average ticket price for that event, that's a risk
   priceRisk = () => {
     const allTickets = this.props.tickets.length
@@ -120,14 +120,14 @@ class EventDetails extends PureComponent{
     const {tickets} = this.props
     const {event} = this.props
  
-const result = this.authorRisk()
+const result = this.authorsRisk()
 console.log(result)
 
 // why error
 const numTicketsByAuthor = this.props.tickets.reduce((counts, ticket) => {
   counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
   return counts;
-}, {});
+}, []);
 
 const authorRisk = (ticket, numTicketsByAuthor) => {
   const numAuthorTickets = numTicketsByAuthor[ticket.user.id];
