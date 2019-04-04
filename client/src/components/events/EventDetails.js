@@ -46,11 +46,6 @@ class EventDetails extends PureComponent{
     // }
     
   }
-  
-  rewrittenRisk = () => {
-    const numTicketsByAuthor = this.props.tickets
-    const value = ''
-  }
 
   // * if the ticket price is lower than the average ticket price for that event, that's a risk
   priceRisk = () => {
@@ -74,17 +69,30 @@ class EventDetails extends PureComponent{
   
   
   // * if there are >3 comments on the ticket, add 5% to the risk
-  commentRisk = () => {
-    const allComments = this.props.tickets.map(tickets => {
-      return tickets.comments.length
-    })
-    console.log(allComments)
-    if (allComments > 3) {
-      return 5
-    } else {
-      return 0
-    }
+  commentsRisk = () => {
+  const numCommentsByTicket = this.props.tickets
+  console.log(numCommentsByTicket)
+  const value = numCommentsByTicket.reduce((counts, ticket) => {
+    counts[ticket.comments.id] = (counts[ticket.comments.id] || 0) + 1;
+    return counts;
+  }, { counts: ''});
+  let array = []
+  console.log(value)
+  array.push(value)
+  console.log(array)
   }
+  //ABOVE RETURNS NUMBER OF COMMENTS BUT WHAT NEXT, ALSO KEY IS UNDEFINED
+  // commentRisk = () => {
+  //   const allComments = this.props.tickets.map(tickets => {
+  //     return tickets.comments.length
+  //   })
+  //   console.log(allComments)
+  //   if (allComments > 3) {
+  //     return 5
+  //   } else {
+  //     return 0
+  //   }
+  // }
   
   // if the ticket was added during business hours (9-17), 
   //deduct 10% from the risk, if not, add 10% to the risk
@@ -152,6 +160,8 @@ const authorRisk = (ticket, numTicketsByAuthor) => {
 const date = this.dateRisk()
 console.log(date)
 
+const comments = this.commentsRisk()
+console.log(comments)
 
 
     const {ticket} = this.props
