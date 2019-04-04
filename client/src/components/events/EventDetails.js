@@ -19,22 +19,21 @@ class EventDetails extends PureComponent{
     this.props.createTicket(ticket)
   }
 
-  // IDEA: USE REDUCE EVERYWHERE TO ADJUST ALGORITHM< SHOULD WORK
-  // if the ticket is the only ticket of the author, add 10%
 
-//increment by 1
-//to count the tickets
-// numTicketsByAuthor will print smth like... {1: 15, 2: 4} [userId]: numberOfTickets
+  // if the ticket is the only ticket of the author, add 10%
+  //increment by 1
+  //to count the tickets
+  // numTicketsByAuthor will print smth like... {1: 15, 2: 4} [userId]: numberOfTickets
   authorsRisk = () => {
     const numTicketsByAuthor = this.props.tickets
     const value = numTicketsByAuthor.reduce((counts, ticket) => {
       counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
-      return counts;
+        return counts;
     }, {});
-    let array = []
-    console.log(value)
-    array.push(value)
-    console.log(array)
+      let array = []
+      console.log(value)
+      array.push(value)
+      console.log(array)
     // value = object with key of user id and a number of tickets for that user
     //ERRORING LINE BELOW
     // const numAuthorTickets = value[ticket.user.id];
@@ -57,14 +56,16 @@ class EventDetails extends PureComponent{
     console.log(oneTicketPrice) 
     const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price) //CORRECT
     console.log(manyTicketsPrice)
-    const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0) // CORRECT
 
+    const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0) // CORRECT
     console.log(total)
+
     const average = total / allTickets // CORRECT
     console.log(average) 
+
     // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
-  // 	* if a ticket is X% more expensive than the average price, 
-  //deduct X% from the risk, with a maximum of 10% deduction
+    // 	* if a ticket is X% more expensive than the average price, 
+    //deduct X% from the risk, with a maximum of 10% deduction
     const risk = (100 * oneTicketPrice / average - 100)
     if (risk < -10) {
       return -10
@@ -82,12 +83,12 @@ class EventDetails extends PureComponent{
   console.log(numCommentsByTicket)
   const value = numCommentsByTicket.reduce((counts, ticket) => {
     counts[ticket.comments.id] = (counts[ticket.comments.id] || 0) + 1;
-    return counts;
+      return counts;
   }, { counts: ''});
-  let array = []
-  console.log(value)
-  array.push(value)
-  console.log(array)
+    let array = []
+    console.log(value)
+    array.push(value)
+    console.log(array)
   }
   //ABOVE RETURNS NUMBER OF COMMENTS BUT WHAT NEXT, ALSO KEY IS UNDEFINED
   // commentRisk = () => {
@@ -108,62 +109,53 @@ class EventDetails extends PureComponent{
     const dateCreated = this.props.tickets.map(tickets => { //CORRECT, RETURNS ARRAY OF DATES WHEN THE TICKET WAS CREATED 
       return tickets.dateCreated
     })
+    console.log(dateCreated)
     // transform array = for every date in array, replace with only hour of creation
    // assign every creation hour a corresponding ticket id, must return object(key = ticket.id, value=hour)
    // push to new array, must return an array of objects
     //for every object in array, check if hour is between 9 and 17 (if statement)
     //for every object whose hour is between 9 and 17 return -10
     // else return 10
-    console.log(dateCreated)
   }
   
   
   // The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
-  totalRisk = () => {
-    const authorRisk = this.authorRisk()
-    const priceRisk = this.priceRisk()
-    const commentRisk = this.commentRisk()
-    const dateRisk = this.dateRisk()
+  // totalRisk = () => {
+  //   const authorRisk = this.authorRisk()
+  //   const priceRisk = this.priceRisk()
+  //   const commentRisk = this.commentRisk()
+  //   const dateRisk = this.dateRisk()
+  //   const risk = authorRisk + priceRisk + commentRisk
   
-    const risk = authorRisk + priceRisk + commentRisk
-  
-    if (risk < 5) {
-      return 5
-    } else if (risk > 95) {
-      return 95
-    } else {
-      return risk
-    }
-  }
+  //   if (risk < 5) {
+  //     return 5
+  //   } else if (risk > 95) {
+  //     return 95
+  //   } else {
+  //     return risk
+  //   }
+  // }
   
   //End of code for risk
 
-
-  //To show color for risk on this page as well
-  //Map over ticket, get data I need
-  //Then calculate risk again
   render() {
     const {tickets} = this.props
     const {event} = this.props
  
-const result = this.authorsRisk()
-console.log('authorsRisk:', result)
+    const result = this.authorsRisk()
+    console.log('authorsRisk:', result)
 
+    const price = this.priceRisk()
+    console.log('priceRisk:', price)
 
-const price = this.priceRisk()
-console.log('priceRisk:', price)
+    const date = this.dateRisk()
+    console.log('dateRisk:', date)
 
-const date = this.dateRisk()
-console.log('dateRisk:', date)
-
-const comments = this.commentsRisk()
-console.log('commentsRisk:', comments)
-
+    const comments = this.commentsRisk()
+    console.log('commentsRisk:', comments)
 
     const {ticket} = this.props
 
-    // const risky = this.totalRisk()
-    // console.log(risky)
     if (event) {
       return (
         <div>

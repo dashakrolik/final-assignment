@@ -17,7 +17,6 @@ export default class EventForm extends PureComponent {
 	}
 
 	render() {
-
 		const initialValues = this.props.initialValues || {}
 		console.log(initialValues)
 		return (

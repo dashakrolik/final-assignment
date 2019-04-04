@@ -16,6 +16,7 @@ class EventsList extends PureComponent{
   }
   state = {}
 
+  //only return current events
   returnCurrentEvents = () => {
     let MyDate = new Date();
     let CurrenDateString;
@@ -27,10 +28,8 @@ class EventsList extends PureComponent{
   
   render() {
     const {events} = this.props 
-    console.log(this.props)
     this.state = this.returnCurrentEvents()
-    console.log(this.state)
-    
+ 
     return (
     <div>
       <br></br><br></br><br></br><br></br><br></br>
