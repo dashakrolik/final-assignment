@@ -4,9 +4,9 @@ import { loadEvents, createEvent } from '../../actions/events';
 import { Link } from 'react-router-dom';
 import EventForm from './EventForm';
 import { getUsers } from '../../actions/users';
-import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-
+import './EventsList.css'
 
 class EventsList extends PureComponent{
   createEvent = (event) => {
@@ -33,23 +33,24 @@ class EventsList extends PureComponent{
     this.state = this.returnCurrentEvents()
  
     return (
-    <div>
-      <Typography  variant="eventsList" align="center" color="inherit" style={{flex: 1}}></Typography>
-      <br></br><br></br><br></br><br></br><br></br>
+    <div className="EventsList">
+      <Paper className="outer-paper" wrap="wrap">
+      <br></br>
         <h1>Events</h1>
           { 
             this.state.map(event => 
-            (<div key={event.id}>
+            (<div key={event.id} className="EventsListImageAndLink">
             <img src={event.url}/>
-            <p><Link to={`/events/${event.id}`}>{event.name}</Link></p>
+            <span><Link to={`/events/${event.id}`}>{event.name}</Link></span>
             </div>)) 
           } 
           { 
           this.props.currentUser &&
-          <div><h2>Add event</h2><EventForm onSubmit={this.createEvent} />
+          <div className="EventForm"><h1>Add event</h1><EventForm onSubmit={this.createEvent} />
           </div>
         }
       <br></br><br></br><br></br><br></br><br></br>
+      </Paper>
     </div>
     )
   }

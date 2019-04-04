@@ -63,7 +63,7 @@ The calculated risk of a ticket depends on many factors. Make sure that the risk
 * As a logged in customer I want to add a ticket (for a specific event) that shows up on the event page with a title, picture, price and description ++
 * As an author of the ticket I want to be able to edit a ticket's description, price and picture (other logged in customers cannot do this! only authors and admins) ++
 * As a logged in customer I want to be able to create events with a name, picture (logo), date and description ++
-* As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list TODO: rewrite the algorithm for all tickets
+* As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list rewrite the algorithm for all tickets
 
 ## Tools and technology
 
@@ -159,11 +159,9 @@ Day 4:
 
 
 Before the demo
-- DONE Add first name to form => send to db DONE
 - Make sure CORS chrome extension is off, else error with jwt token
 - Add error codes to API when not authorized or error with input constraints
 - Add events (current & not current date)
 - Add tickets adding up to a normal distribution qua price to display risk algo
 - Sign up as different users
-- DONE Check again logging in / signing up - allowing to add events / tickets only when auth
 - CSS, make pretty!!!!!!!!!!!!!!!!!!!

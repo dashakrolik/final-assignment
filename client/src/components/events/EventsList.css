@@ -1,0 +1,77 @@
+.outer-paper {
+    margin-top: 20px;
+    margin: auto;
+    padding: 50px;
+    width: 500px;
+    align-content: center;
+    display: block;
+    margin-left: 500;
+    margin-right: 500px;
+
+  }
+
+  .EventsList {
+    margin-top: 20px;
+    align-content: center;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    top:50%;
+    left:50%; 
+  }
+
+  button {
+    color: #ffffff;
+    background: rgb(37, 177, 153);
+    border: 1px #DADADA solid;
+    width: 175px;
+    height: 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 10pt;
+    outline: none;
+    -webkit-transition: padding 1s;
+    transition: 1s
+  
+  }
+
+  button:hover {
+    border: 1px rgb(255, 255, 255) solid;
+    box-shadow: 1px 1px 1px #EAEAEA;
+    color: #ffffff;
+    background: rgb(62, 87, 141);
+    -webkit-transition: border-radius 1s;
+    transition: 1s
+  }
+  
+  
+  button:active {
+    box-shadow: inset 1px 1px 1px #DFDFDF;   
+  }
+
+  .EventForm {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .EventsListImageAndLink {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+.EventDetails {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 20px;
+    align-content: center;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    top:50%;
+    left:50%; 
+}
+

@@ -18,8 +18,8 @@ export default class EventForm extends PureComponent {
 
 	render() {
 		const initialValues = this.props.initialValues || {}
-		console.log(initialValues)
 		return (
+			
 			<form onSubmit={this.handleSubmit}>
 				<label>Event name</label>
 					<input name="name" value={

@@ -20,8 +20,8 @@ export default class TicketForm extends PureComponent {
 		const initialValues = this.props.initialValues || {}
 		return (
 
-			<form onSubmit={this.handleSubmit}>
-						<br></br>			<br></br>			<br></br>			<br></br>
+			<form onSubmit={this.handleSubmit} className="TicketForm">
+						
 				<label>Url</label>
 					<input name="url" id="url" value={
 						this.state.url !== null || undefined ? this.state.url : initialValues.url || ''
