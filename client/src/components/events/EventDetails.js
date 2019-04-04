@@ -3,67 +3,57 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { loadEvent } from '../../actions/events';
 import { getUsers } from '../../actions/users';
+import { loadSelectedComments } from '../../actions/comments';
 import { loadSelectedTickets, createTicket, loadTicket } from '../../actions/tickets'
 import TicketForm from '../tickets/TicketForm'
 
 class EventDetails extends PureComponent{    
-  componentDidMount() {
+  state = []
+
+  componentWillMount() {
     this.props.loadEvent(this.props.match.params.id) 
     this.props.loadSelectedTickets(this.props.match.params.id)
     this.props.getUsers()
+    console.log(this.state)
+    this.props.loadSelectedComments(this.props.match.params.id)
+
   }
 
   createTicket = (ticket) => {
     ticket.event = this.props.event
+    this.state = ticket
     this.props.createTicket(ticket)
-  }
-
-  // if the ticket is the only ticket of the author, add 10%
-  //increment by 1
-  //to count the tickets
-  // numTicketsByAuthor will print smth like... {1: 15, 2: 4} [userId]: numberOfTickets
-  authorsRisk = () => {
-    const numTicketsByAuthor = this.props.tickets
-    const value = numTicketsByAuthor.reduce((counts, ticket) => {
-      counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
-        return counts;
-    }, {});
-      let array = []
-      console.log(value)
-      array.push(value)
-      console.log(array)
-    // value = object with key of user id and a number of tickets for that user
-    //ERRORING LINE BELOW
-    // const numAuthorTickets = value[ticket.user.id];
-    //   if (numAuthorTickets === 1) {
-    //     return console.log(10);
-    //   } else {
-    //    return console.log(0);
-      
-    // }
+    this.props.loadSelectedTickets(this.props.match.params.id)
+    this.props.loadTicket(this.props.match.params.id)
     
   }
 
+  
+
+
+
+  authorRisk = () => {
+    const authorId = this.props.tickets.map(ticket => {
+      return ticket.user.id
+    })
+    const authorTickets = authorId.filter(author => {
+      return author = this.props.ticket.user.id
+    }).length
+    if (authorTickets === 1) {
+      return 10 
+    } else {
+      return 0
+    }
+  }
   // * if the ticket price is lower than the average ticket price for that event, that's a risk
   priceRisk = () => {
     const allTickets = this.props.tickets.length
-    console.log(allTickets)
-    const oneTicketPrice = this.props.tickets.map(tickets => { //THIS IS NOT CORRECT
-      return tickets.price
-    })
-    console.log(oneTicketPrice) 
-    const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price) //CORRECT
-    console.log(manyTicketsPrice)
-
-    const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0) // CORRECT
-    console.log(total)
-
-    const average = total / allTickets // CORRECT
-    console.log(average) 
-
-    // 	* if a ticket is X% cheaper than the average price, add X% to the risk 
-    // 	* if a ticket is X% more expensive than the average price, 
-    //deduct X% from the risk, with a maximum of 10% deduction
+    const oneTicketPrice = this.state.price
+    const manyTicketsPrice = this.props.tickets.map(ticket => ticket.price)
+    const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
+    const average = total / allTickets
+    // 	* if a ticket is X% cheaper than the average price, add X% to the risk  * if a ticket is X% more expensive than the average price, deduct X% from the risk, with a maximum of 10% deduction
+    // ((ticketPrice - average) / average) * 100
     const risk = (100 * oneTicketPrice / average - 100)
     if (risk < -10) {
       return -10
@@ -71,89 +61,104 @@ class EventDetails extends PureComponent{
       return risk
     }
   }
-  
-  
   // * if there are >3 comments on the ticket, add 5% to the risk
-  commentsRisk = () => {
-  const numCommentsByTicket = this.props.tickets
-  //Reduce, calculate length of array
-
-  console.log(numCommentsByTicket)
-  const value = numCommentsByTicket.reduce((counts, ticket) => {
-    counts[ticket.comments.id] = (counts[ticket.comments.id] || 0) + 1;
-      return counts;
-  }, { counts: ''});
-    let array = []
-    console.log(value)
-    array.push(value)
-    console.log(array)
+  commentRisk = () => {
+    const allComments = this.props.comments.length
+    if (allComments > 3) {
+      return 5
+    } else {
+      return 0
+    }
   }
-  //ABOVE RETURNS NUMBER OF COMMENTS BUT WHAT NEXT, ALSO KEY IS UNDEFINED
-  // commentRisk = () => {
-  //   const allComments = this.props.tickets.map(tickets => {
-  //     return tickets.comments.length
-  //   })
-  //   console.log(allComments)
-  //   if (allComments > 3) {
-  //     return 5
-  //   } else {
-  //     return 0
-  //   }
-  // }
-  
-  // if the ticket was added during business hours (9-17), 
-  //deduct 10% from the risk, if not, add 10% to the risk
+  // if the ticket was added during business hours (9-17), deduct 10% from the risk, if not, add 10% to the risk
   dateRisk = () => {
-    const dateCreated = this.props.tickets.map(tickets => { //CORRECT, RETURNS ARRAY OF DATES WHEN THE TICKET WAS CREATED 
-      return tickets.dateCreated
-    })
+    const dateCreated = this.state.dateCreated
     console.log(dateCreated)
-    // transform array = for every date in array, replace with only hour of creation
-    // var dateArray = input.split('/'); ?
-   // assign every creation hour a corresponding ticket id, must return object(key = ticket.id, value=hour)
-   // push to new array, must return an array of objects
-    //for every object in array, check if hour is between 9 and 17 (if statement)
-    //for every object whose hour is between 9 and 17 return -10
-    // else return 10
+  
+    //changing UTC date to CET date
+    const hours = new Date(dateCreated)
+    const hours1 = hours.toLocaleString({ timeZone: 'CET'})
+    //
+  
+    console.log(hours1)
+    const newHours = hours.getHours()
+    if (newHours >= 9 && newHours <= 17) {
+      return -10
+    } else {
+      return 10
+    }
+  }
+  // The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
+  totalRisk = () => {
+    //have base value for risk that is 5 percent?
+    const authorRisk = this.authorRisk()
+    const priceRisk = this.priceRisk()
+    const commentRisk = this.commentRisk()
+    const dateRisk = this.dateRisk()
+  
+    const risk = authorRisk + priceRisk + commentRisk + dateRisk
+  
+    if (risk < 5) {
+      return 5
+    } else if (risk > 95) {
+      return 95
+    } else {
+      return Math.round(risk)
+    }
   }
   
+  riskColor = (risk) => {
+    if (risk < 30) {
+      const color = {color: 'green'}
+      return color
+    } else if (risk >= 30) {
+      const color = {color: 'red'}
+      return color
+    } else {
+      const color = {color: 'orange'}
+      return color
+    }
+  }
   
-  // The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
-  // totalRisk = () => {
-  //   const authorRisk = this.authorRisk()
-  //   const priceRisk = this.priceRisk()
-  //   const commentRisk = this.commentRisk()
-  //   const dateRisk = this.dateRisk()
-  //   const risk = authorRisk + priceRisk + commentRisk
-  
-  //   if (risk < 5) {
-  //     return 5
-  //   } else if (risk > 95) {
-  //     return 95
-  //   } else {
-  //     return risk
-  //   }
-  // }
-  
-  //End of code for risk
-
+  calculateRisk = () => {
+    if (this.props.ticket && this.state.dateCreated) {
+    let risk = this.totalRisk()
+      return risk
+   } else {
+     return null
+   }
+  }
   render() {
+  
     const {tickets} = this.props
     const {event} = this.props
- 
-    const result = this.authorsRisk()
-    console.log('authorsRisk:', result)
 
-    const price = this.priceRisk()
-    console.log('priceRisk:', price)
+    
 
-    const date = this.dateRisk()
-    console.log('dateRisk:', date)
+    
+    
+    // const result = this.authorsRisk()
+    // console.log('authorsRisk:', result)
 
-    const comments = this.commentsRisk()
-    console.log('commentsRisk:', comments)
+    // const price = this.priceRisk()
+    // console.log('priceRisk:', price)
+
+    // const date = this.dateRisk()
+    // console.log('dateRisk:', date)
+
+    // const comments = this.commentsRisk()
+    // console.log('commentsRisk:', comments)
 
     const {ticket} = this.props
+    console.log(this.state)
+    console.log(ticket)
+
+
+    const result = this.calculateRisk()
+    if (this.props.ticket && this.state.dateCreated) {
+      return result
+    }
+    console.log(result)
 
     if (event) {
       return (
@@ -174,6 +179,7 @@ class EventDetails extends PureComponent{
                 <li key={ticket.price}>{ticket.price}</li>
                 <li key={ticket.description}>{ticket.description}</li>
                 <li key={ticket.id}>{ticket.dateCreated}</li>
+                <img src={ticket.url}></img>
                 <li>Risk: </li>
                 <li><Link to={`/tickets/${ticket.id}`}>Ticket details</Link></li>
               </ul>))}
@@ -181,6 +187,11 @@ class EventDetails extends PureComponent{
                 <p>Submit new ticket for sale</p>
                 <TicketForm onSubmit={this.createTicket} />
                 </div>}
+
+              {
+                this.props.currentUser && this.props.event && 
+                <div>created</div>
+              }
           </div>
         </div>
         )} else {
@@ -195,8 +206,9 @@ const mapStateToProps = function (state) {
     tickets: state.tickets,
     currentUser: state.currentUser,
     users: state.users,
-    ticket: state.ticket
+    ticket: state.ticket,
+    comments: state.comments
   }
 }
 
-export default connect(mapStateToProps, { loadEvent , loadSelectedTickets, createTicket, getUsers, loadTicket })(EventDetails)
+export default connect(mapStateToProps, { loadSelectedComments, loadEvent , loadSelectedTickets, createTicket, getUsers, loadTicket })(EventDetails)

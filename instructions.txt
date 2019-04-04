@@ -154,4 +154,16 @@ Day 4:
 - 8.5 user stories complete
 - TODO: 1. finish algorithm 2. add CSS, my app is ugly
 - * if there is time, investigate why the occasional POST request errors occur
+- * Figured POST issue - it is not an issue, I have contraints in db, e.g. min length etc
 
+
+
+Before the demo
+- Add first name to form => send to db
+- Make sure CORS chrome extension is off, else error with jwt token
+- Add error codes to API when not authorized or error with input constraints
+- Add events (current & not current date)
+- Add tickets adding up to a normal distribution qua price to display risk algo
+- Sign up as different users
+- Check again logging in / signing up - allowing to add events / tickets only when auth
+- CSS, make pretty

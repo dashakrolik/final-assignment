@@ -57,6 +57,7 @@ priceRisk = () => {
   const total = manyTicketsPrice.reduce((acc, value) => acc + value, 0)
   const average = total / allTickets
   // 	* if a ticket is X% cheaper than the average price, add X% to the risk  * if a ticket is X% more expensive than the average price, deduct X% from the risk, with a maximum of 10% deduction
+  // ((ticketPrice - average) / average) * 100
   const risk = (100 * oneTicketPrice / average - 100)
   if (risk < -10) {
     return -10
@@ -93,6 +94,7 @@ dateRisk = () => {
 }
 // The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
 totalRisk = () => {
+  //have base value for risk that is 5 percent?
   const authorRisk = this.authorRisk()
   const priceRisk = this.priceRisk()
   const commentRisk = this.commentRisk()
@@ -138,20 +140,20 @@ riskColor = (risk) => {
             }
             { 
               !this.state.edit &&
-            <div>
-              <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-              <p>Seller email: {ticket.user.firstName}</p>
-              <p>URL: {ticket.url}</p>
-              <p>Description: {ticket.description}</p>
-              <p>Ticket Id: {ticket.id}</p>
-              <p>Price: {ticket.price}</p>
-              <p>Date Created: {ticket.dateCreated}</p>
-              <p style={this.riskColor(this.totalRisk())}>Risk of this ticket being fraudulent: {this.totalRisk()}%  </p>
-            
-              { this.props.currentUser && !this.state.edit &&
-                  <button onClick={this.toggleEdit}>Edit ticket</button>
-              }
-            </div>
+              <div>
+                <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                  <p>Seller email: {ticket.user.firstName}</p>
+                  <p>URL: {ticket.url}</p>
+                  <p>Description: {ticket.description}</p>
+                  <p>Ticket Id: {ticket.id}</p>
+                  <p>Price: {ticket.price}</p>
+                  <p>Date Created: {ticket.dateCreated}</p>
+                  <p style={this.riskColor(this.totalRisk())}>Risk of this ticket being fraudulent: {this.totalRisk()}%  </p>
+                
+                  { this.props.currentUser && !this.state.edit &&
+                      <button onClick={this.toggleEdit}>Edit ticket</button>
+                  }
+              </div>
             }  
         
             
