@@ -29,7 +29,7 @@ class EventDetails extends PureComponent{
     const numTicketsByAuthor = this.props.tickets.reduce((counts, ticket) => {
       counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
       return counts;
-    });
+    }, {});
     
     const authorRisk = (ticket, numTicketsByAuthor) => {
       const numAuthorTickets = numTicketsByAuthor[ticket.user.id];
@@ -122,14 +122,26 @@ class EventDetails extends PureComponent{
  
 const result = this.authorRisk()
 console.log(result)
-  //  const riskAgain = () => {
-  //   const ticketsObject = this.props.tickets.map(ticket => {
-  //     return ticket
-  //   })
-  //   console.log(ticketsObject)
-  //   }
 
-    // riskAgain()
+// why error
+const numTicketsByAuthor = this.props.tickets.reduce((counts, ticket) => {
+  counts[ticket.user.id] = (counts[ticket.user.id] || 0) + 1;
+  return counts;
+}, {});
+
+const authorRisk = (ticket, numTicketsByAuthor) => {
+  const numAuthorTickets = numTicketsByAuthor[ticket.user.id];
+  if (numAuthorTickets === 1) {
+    return 10;
+  } else {
+   return 0;
+  }
+}
+
+console.log(authorRisk)
+
+
+
     const {ticket} = this.props
 
     // const risky = this.totalRisk()
