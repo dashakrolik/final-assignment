@@ -12,7 +12,7 @@ export default class Ticket extends BaseEntity {
   id?: number
 
   @IsString()
-  @Column('text')
+  @Column('text', { nullable: true })
   url: string
 
   @IsString()

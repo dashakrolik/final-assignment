@@ -6,6 +6,7 @@ import TicketForm from './TicketForm'
 import { createComment, loadSelectedComments, loadComments } from '../../actions/comments'
 import CommentsForm from '../comments/CommentsForm'
 import './TicketDetails.css'
+import Paper from '@material-ui/core/Paper'
 
 class TicketDetails extends PureComponent{
  state = { edit: false }
@@ -133,6 +134,7 @@ riskColor = (risk) => {
       if (ticket) {
         return(
           <div>
+            <Paper className="outer-paper" wrap="wrap">
             {
               this.props.currentUser &&
               this.state.edit &&
@@ -140,16 +142,16 @@ riskColor = (risk) => {
             }
             { 
               !this.state.edit &&
-              <div>
+              <div className="TicketDetailsContent">
                 <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                  <p>Seller email: {ticket.user.firstName}</p>
-                  <p>URL: {ticket.url}</p>
+                  <p>Seller name: {ticket.user.firstName}</p>
+                  <p>Seller email: {ticket.user.email}</p>
                   <p>Description: {ticket.description}</p>
                   <p>Ticket Id: {ticket.id}</p>
                   <p>Price: {ticket.price}</p>
                   <p>Date Created: {ticket.dateCreated}</p>
                   <p style={this.riskColor(this.totalRisk())}>Risk of this ticket being fraudulent: {this.totalRisk()}%  </p>
-                
+                  <img src={ticket.url}></img>
                   { this.props.currentUser && !this.state.edit &&
                       <button onClick={this.toggleEdit}>Edit ticket</button>
                   }
@@ -177,7 +179,7 @@ riskColor = (risk) => {
             }
               <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
-
+              </Paper>
           </div>
         )
       } else {

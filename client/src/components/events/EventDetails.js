@@ -30,7 +30,7 @@ class EventDetails extends PureComponent{
       return (
         <div className="EventDetails">
           <Paper className="outer-paper" wrap="wrap">
-          <div>
+          <div className="EventDetailsContent"> 
             <br></br><br></br>
             <img src={event.url}/>
             <p>Event name: {event.name}</p>
@@ -38,16 +38,16 @@ class EventDetails extends PureComponent{
             <p>Starts on: {event.start}</p>
             <p>Ends on: {event.end}</p>
 
+            <h3>Tickets for sale:</h3>
             {tickets.map(ticket => (
-              <ul>
-                <li key={ticket.user.email}>{ticket.user.email}</li>
-                <li key={ticket.price}>{ticket.price}</li>
-                <li key={ticket.description}>{ticket.description}</li>
-                <li key={ticket.id}>{ticket.dateCreated}</li>
+             <div className="EventDetailsMap">
                 <img src={ticket.url}></img>
-                <li>Risk: </li>
-                <li><Link to={`/tickets/${ticket.id}`}>Ticket details</Link></li>
-              </ul>))}
+                <p>Seller emai: {ticket.user.email}</p>
+                <p>Ticket price: {ticket.price}</p>
+                <p>Description: {ticket.description}</p>
+                <p>Date posted:{ticket.dateCreated}</p>
+                <p><Link to={`/tickets/${ticket.id}`}>Ticket details</Link></p>
+              </div>))}
               {this.props.currentUser && <div>
                 <br></br>
                 <p>Submit new ticket for sale</p>
