@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, CreateDateColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, Length, MinLength } from 'class-validator'
 import Ticket from '../tickets/entity'
@@ -25,10 +25,10 @@ export default class Event extends BaseEntity {
   @Column('text')
   url: string
 
-  @CreateDateColumn({type: 'timestamp'})
+  @Column('date', {nullable:true})
   start: Date;
 
-  @CreateDateColumn({type: 'timestamp'})
+  @Column('date', {nullable:true})
   end: Date;
 
   @ManyToOne(_ => User, user => user.events, {eager:true})
@@ -37,12 +37,3 @@ export default class Event extends BaseEntity {
   @OneToMany(_ => Ticket, ticket => ticket.event, {eager:true})
   tickets: Ticket[];
 }
-
-
-
-// Events have:
-
-// * a name
-// * a description
-// * a picture or logo
-// * a start and end date (could be the same)

@@ -1,12 +1,5 @@
-import {
-    JsonController,
-    Get,
-    Param,
-    Body,
-    Post,
-    HttpCode, Authorized, CurrentUser
-  } from "routing-controllers";
-  import Event from "./entity";
+import { JsonController, Get, Param, Body, Post, HttpCode, Authorized, CurrentUser } from "routing-controllers";
+import Event from "./entity";
 import User from "../users/entity";
   
   @JsonController()
@@ -34,7 +27,7 @@ import User from "../users/entity";
         @Body() event: Event
         ) {
             if(user instanceof User) event.user = user
-            return event.save()
+            return await event.save()
         }
 
 

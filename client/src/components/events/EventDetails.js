@@ -6,7 +6,6 @@ import { getUsers } from '../../actions/users';
 import { loadSelectedTickets, createTicket, loadTicket } from '../../actions/tickets'
 import TicketForm from '../tickets/TicketForm'
 import Paper from '@material-ui/core/Paper'
-import Button from '@material-ui/core/Button'
 import './EventsList.css'
 
 class EventDetails extends PureComponent{    
@@ -30,30 +29,30 @@ class EventDetails extends PureComponent{
       return (
         <div className="EventDetails">
           <Paper className="outer-paper" wrap="wrap">
-          <div className="EventDetailsContent"> 
-            <br></br><br></br>
-            <img src={event.url}/>
-            <p>Event name: {event.name}</p>
-            <p>Description: {event.description}</p>
-            <p>Starts on: {event.start}</p>
-            <p>Ends on: {event.end}</p>
+            <div className="EventDetailsContent"> 
+              <br></br><br></br>
+              <img src={event.url}/>
+              <p>Event name: {event.name}</p>
+              <p>Description: {event.description}</p>
+              <p>Starts on: {event.start}</p>
+              <p>Ends on: {event.end}</p>
 
-            <h3>Tickets for sale:</h3>
-            {tickets.map(ticket => (
-             <div className="EventDetailsMap">
-                <img src={ticket.url}></img>
-                <p>Seller emai: {ticket.user.email}</p>
-                <p>Ticket price: {ticket.price}</p>
-                <p>Description: {ticket.description}</p>
-                <p>Date posted:{ticket.dateCreated}</p>
-                <p><Link to={`/tickets/${ticket.id}`}>Ticket details</Link></p>
-              </div>))}
-              {this.props.currentUser && <div>
-                <br></br>
-                <p>Submit new ticket for sale</p>
-                <TicketForm onSubmit={this.createTicket} />
-                </div>}
-          </div>
+              <h3>Tickets for sale:</h3>
+              {tickets.map(ticket => (
+              <div className="EventDetailsMap">
+                  <img src={ticket.url}></img>
+                  <p>Seller emai: {ticket.user.email}</p>
+                  <p>Ticket price: {ticket.price}</p>
+                  <p>Description: {ticket.description}</p>
+                  <p>Date posted:{ticket.dateCreated}</p>
+                  <p><Link to={`/tickets/${ticket.id}`}>Ticket details</Link></p>
+                </div>))}
+                {this.props.currentUser && <div>
+                  <br></br>
+                  <p>Submit new ticket for sale</p>
+                  <TicketForm onSubmit={this.createTicket} />
+                  </div>}
+            </div>
           </Paper>
         </div>
         )} else {

@@ -4,9 +4,8 @@ import {logout} from './users'
 import {isExpired} from '../jwt'
 
 export const COMMENT_CREATE = 'COMMENT_CREATE'
-export const SELECTED_COMMENTS_FETCHED = 'SELECTED_COMMENTS_FETCHED' //Selected all
+export const SELECTED_COMMENTS_FETCHED = 'SELECTED_COMMENTS_FETCHED'
 export const ALL_COMMENTS_FETCHED = 'ALL_COMMENTS_FETCHED'
-
 
 export const createComment = (comment) => (dispatch, getState) => {
     const state = getState()

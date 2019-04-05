@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import './EventsList.css'
 
 class EventsList extends PureComponent{
+  state = {}
   createEvent = (event) => {
     this.props.createEvent(event)
   }
@@ -16,33 +17,10 @@ class EventsList extends PureComponent{
     this.props.loadEvents()
     this.props.getUsers()
   }
-  state = {}
 
-  //only return current events
-  returnCurrentEvents = () => {
-
-
-
-    let EventDate =  this.props.events.map(event => Date.parse(event.end))
-    
-    console.log(EventDate)
-    var d = new Date();
-    var n = d.getTime()
-    console.log(n)
-    // let GetTime = EventDate.map(event => event.getTime())
-    //  if((check.getTime() <= to.getTime() && check.getTime() >= from.getTime())) 
-    
-    let TransformArray = this.props.events.map(event => event.end = EventDate)
-
-    console.log(TransformArray)
-    const currentEvents = EventDate.filter(event => event > n? event : null)
-    return currentEvents
-  }
   
   render() {
     const {events} = this.props 
-    this.state = this.returnCurrentEvents()
-    console.log(this.state)
     return (
     <div className="EventsList">
       <Paper className="outer-paper" wrap="wrap">
@@ -56,11 +34,11 @@ class EventsList extends PureComponent{
             </div>)) 
           } 
           { 
-          this.props.currentUser &&
-          <div className="EventForm"><h1>Add event</h1><EventForm onSubmit={this.createEvent} />
-          </div>
-        }
-      <br></br><br></br><br></br><br></br><br></br>
+            this.props.currentUser &&
+            <div className="EventForm"><h1>Add event</h1><EventForm onSubmit={this.createEvent} />
+            </div>
+          }
+        <br></br><br></br><br></br><br></br>
       </Paper>
     </div>
     )

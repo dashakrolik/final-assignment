@@ -20,7 +20,7 @@ export default class CommentsController {
         @CurrentUser() user: User, 
         @Body() comment: Comment
     ) {
-        if (user) comment.user = user
+        if(user instanceof User) comment.user = user
         return await comment.save()
     }
 }
