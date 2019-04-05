@@ -21,7 +21,6 @@ const TopBar = (props) => {
           user &&
           <Button color="inherit"><AccountIcon /> { user.firstName }</Button>
         }
-
         {
           location.pathname.indexOf('signup') > 0 &&
           <Button color="inherit" onClick={() => history.push('/login')}>Login</Button>

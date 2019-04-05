@@ -3,14 +3,11 @@ import {baseUrl} from '../constants'
 import {logout} from './users'
 import {isExpired} from '../jwt'
 
-export const ALL_TICKETS_FETCHED = 'ALL_TICKETS_FETCHED' //ALL
-export const TICKET_FETCHED = 'TICKET_FETCHED' //One detailed
+export const ALL_TICKETS_FETCHED = 'ALL_TICKETS_FETCHED' 
+export const TICKET_FETCHED = 'TICKET_FETCHED' 
 export const TICKET_CREATE = 'TICKET_CREATE'
 export const EDIT_TICKET = 'EDIT_TICKET'
-export const SELECTED_TICKETS_FETCHED = 'SELECTED_TICKETS_FETCHED' //Selected all
-
-
-
+export const SELECTED_TICKETS_FETCHED = 'SELECTED_TICKETS_FETCHED' 
 
 export const loadTickets = () => (dispatch) => {
     request
@@ -21,7 +18,6 @@ export const loadTickets = () => (dispatch) => {
      }))
      .catch(err => alert(err))
 }
-
 
 export const loadTicket = (ticketId) => (dispatch) => {
     request 
@@ -43,8 +39,6 @@ export const loadSelectedTickets = (eventId) => (dispatch) => {
     .catch(err => alert(err))
   }
 
-
-
 export const createTicket = (ticket) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
@@ -60,8 +54,6 @@ export const createTicket = (ticket) => (dispatch, getState) => {
     }))
     .catch(err => alert(err))
 }
-
-
 
 export const editTicket = (ticketId, data) => (dispatch, getState) => {
     const state = getState()

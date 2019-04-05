@@ -1,10 +1,4 @@
-import { 
-  ALL_TICKETS_FETCHED ,
-  SELECTED_TICKETS_FETCHED,
-  TICKET_CREATE,
-  EDIT_TICKET,
-  
-} from "../actions/tickets";
+import { ALL_TICKETS_FETCHED , SELECTED_TICKETS_FETCHED, TICKET_CREATE, EDIT_TICKET, } from "../actions/tickets";
 
 export default function(state = [], action) {
   switch (action.type) {
