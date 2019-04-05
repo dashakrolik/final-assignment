@@ -24,6 +24,7 @@ class EventsList extends PureComponent{
 
 
     let EventDate =  this.props.events.map(event => Date.parse(event.end))
+    
     console.log(EventDate)
     var d = new Date();
     var n = d.getTime()
@@ -32,6 +33,7 @@ class EventsList extends PureComponent{
     //  if((check.getTime() <= to.getTime() && check.getTime() >= from.getTime())) 
     
     let TransformArray = this.props.events.map(event => event.end = EventDate)
+
     console.log(TransformArray)
     const currentEvents = EventDate.filter(event => event > n? event : null)
     return currentEvents

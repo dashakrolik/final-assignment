@@ -95,20 +95,21 @@ dateRisk = () => {
 }
 // The minimal risk is 5% (there's no such thing as no risk) and the maximum risk is 95%.
 totalRisk = () => {
+  let baseRisk = 5
   //have base value for risk that is 5 percent?
   const authorRisk = this.authorRisk()
   const priceRisk = this.priceRisk()
   const commentRisk = this.commentRisk()
   const dateRisk = this.dateRisk()
 
-  const risk = authorRisk + priceRisk + commentRisk + dateRisk
+  const risk = baseRisk + authorRisk + priceRisk + commentRisk + dateRisk
 
   if (risk < 5) {
     return 5
   } else if (risk > 95) {
     return 95
   } else {
-    return Math.round(risk)
+    return Math.round(baseRisk)
   }
 }
 
