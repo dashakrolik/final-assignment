@@ -20,25 +20,34 @@ class EventsList extends PureComponent{
 
   //only return current events
   returnCurrentEvents = () => {
-    let MyDate = new Date();
-    let CurrenDateString;
-    MyDate.setDate(MyDate.getDate());
-    CurrenDateString = MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
-    const currentEvents =  this.props.events.filter(event => event.end !== CurrenDateString)
+
+
+
+    let EventDate =  this.props.events.map(event => Date.parse(event.end))
+    console.log(EventDate)
+    var d = new Date();
+    var n = d.getTime()
+    console.log(n)
+    // let GetTime = EventDate.map(event => event.getTime())
+    //  if((check.getTime() <= to.getTime() && check.getTime() >= from.getTime())) 
+    
+    let TransformArray = this.props.events.map(event => event.end = EventDate)
+    console.log(TransformArray)
+    const currentEvents = EventDate.filter(event => event > n? event : null)
     return currentEvents
   }
   
   render() {
     const {events} = this.props 
     this.state = this.returnCurrentEvents()
- 
+    console.log(this.state)
     return (
     <div className="EventsList">
       <Paper className="outer-paper" wrap="wrap">
       <br></br>
         <h1>Events</h1>
           { 
-            this.state.map(event => 
+            this.props.events.map(event => 
             (<div key={event.id} className="EventsListImageAndLink">
             <img src={event.url}/>
             <span><Link to={`/events/${event.id}`}>{event.name}</Link></span>
